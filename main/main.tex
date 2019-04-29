@@ -1,8 +1,47 @@
-\documentclass{book}
-\usepackage{subfiles}
+\documentclass[12pt,twoside]{report}
+%\usepackage{subfiles}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 
-
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\usepackage{blindtext}
 \begin{document}
+
+\title{
+{Thesis Title}\\
+{\large Brown University}\\
+}
+\author{Jonathan G. V. Ström}
+\date{Spring 2020}
+\maketitle
+
+% frontmatter
+\chapter*{Abstract}
+Abstract goes here
+
+\chapter*{Dedication}
+To mum and dad
+
+\chapter*{Declaration}
+I declare that..
+
+\chapter*{Acknowledgements}
+I want to thank...
+
+
+
 \tableofcontents{}
-\subfile{chapters/introduction}
+
+% main body
+%\subfile{chapters/chapter1}
+
+\chapter{1}
+
+\section{Intro}
+\blinddocument
+% endmatter
+\appendix
+
 \end{document}
