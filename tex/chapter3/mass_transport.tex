@@ -1,0 +1,11 @@
+Advective-diffusion equation
+
+% TODO: Rewrite so c_i is the gas-phase instead
+\begin{equation}
+  \frac{\partial}{\partial t} (\theta c_i) +
+  \frac{\partial}{\partial t} (\rho_b c_{P,i}) +
+  \frac{\partial}{\partial t} (a_v c_{G,i}) +
+  \vec{u} \cdot \nabla c_i =
+  \nabla \cdot [(D_{D,i} + D_{eff,i}) \nabla c_i] +
+  R_i + S_i
+\end{equation}

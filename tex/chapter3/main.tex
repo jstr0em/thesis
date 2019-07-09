@@ -4,100 +4,33 @@
 \chapter{Modeling Methodology}
 
 \section{Introduction}
+\input{intro.tex}
+
+\section{Perfectly Mixed Indoor Environment}
+\input{indoor.tex}
 
 \section{Water Flow in Unsaturated Porous Media}
-
+\input{richards.tex}
 % Theory soil-water potential and its modeling with Richard's equation
 \subsection{Soil-Water Potential}
 
 % van Genuchten's equation
 \subsection{Soil-Water Retention Curve}
+\input{van_genuchten.tex}
 
 % Darcy's Law
 \section{Vapor Transport in Unsaturated Porous Media}
+\input{vapor_transport.tex}
 
 % Mass Transport
 \section{Mass Transport in Unsaturated Porous Media}
+\input{mass_transport.tex}
+
 
 % TODO: Add multiphase theory for NAPL and DNAPL transport in vadose zone?
 
 \section{References}
 
 % TODO: Use a \input for each section instead of writing things directly
-
-Vapor transport in porous media is described by \textit{Darcy's Law}.
-The vapor velocity depends on the pressure gradient in the soil, is proportional to the permeability of the soil matrix, and is inversely proportional to the viscosity of the fluid.
-
-\begin{equation}\label{eq:darcys_law_saturated}
-  \vec{u} = -\frac{\kappa}{\mu}\nabla p
-\end{equation}
-
-For Darcy's Law to be valid, two assumptions must be fulfilled:
-\begin{enumerate}
-  \item The fluid must be in the laminar regime, typically $\mathrm{Re} < 1$.
-  \item The soil matrix must be saturated with the fluid.
-\end{enumerate}
-In VI-modeling, the first assumption is fulfilled, but the second is not.
-Most of the contaminant vapor transport takes place in the partially saturated vadose zone and thus, \eqref{eq:darcys_law_saturated} needs modification.
-
-In partially saturated soils, a varying portion of the soil pores are available for vapor transport, with the rest being occupied by water, affecting the effective permeability of the soil.
-To model this, a relative permeability property, $k_r$, is introduced:
-\begin{equation}
-  \kappa_\mathrm{eff} = k_r \kappa_s
-\end{equation}
-$k_r$ is a dimensionless parameter that varies between 0 and 1, and $\kappa_s$ is the saturated, or simply the soil matrix permeability.
-
-This gives the modified Darcy's Law used in VI-modeling:
-\begin{equation}\label{eq:darcys_law}
-  \vec{u} = -\frac{k_r \kappa_s}{\mu}\nabla p
-\end{equation}
-
-
-\subsection{Soil Moisture Retention Curves}
-
-The distribution of soil moisture in the soil matrix has profound implications for the advective and diffusive transport of contaminants.
-Soil has a limited amount of pore volume available for contaminant transport, and the presence of water restricts this further; decreasing permeability of the soil and subsequently reduces air flow.
-Diffusivity of the contaminant will also be retarded by the water.
-The contaminant will dissolve into and evaporate from water and the transport will partially occur through water.
-Liquid diffusion coefficients are usually around four orders of magnitude smaller than in air.
-
-The soil moisture content of soils can be estimated in many ways, but two common approaches is to use the analytical formulas of \textit{van Genuchten} or \textit{Brooks and Corey}.
-Both of these formulas give the soil moisture content as a function of the fluid pressure head, $H_p$.
-By definition, when the pressure head is equal to or greater than zero, $H_p \geq 0$, the soil is assumed to be 100\% saturated with the fluid.
-In this work, \textit{van Genuchten's} formula is used.
-
-The soil moisture content, $\theta$ is given by.
-\begin{equation}
-  \theta = \begin{cases}
-    \theta_r + \mathrm{Se}(\theta_s - \theta_r) & H_p < 0 \\
-    \theta_s & H_p \geq 0
-\end{cases}
-\end{equation}
-
-The saturation is given by.
-\begin{equation}
-  \mathrm{Se} = \begin{cases}
-    \frac{1}{(1 + |\alpha H_p|^m)^m} & H_P < 0 \\
-    1 & H_p \geq 0
-  \end{cases}
-\end{equation}
-
-\begin{equation}
-  C_m = \begin{cases}
-    \frac{\alpha m}{1-m}(\theta_s - \theta_r)\mathrm{Se}^{\frac{1}{m}}\big( 1 - \mathrm{Se}^{\frac{1}{m}} \big)^m & H_p < 0 \\
-    0 & H_p \geq 0
-  \end{cases}
-\end{equation}
-
-\begin{equation}
-  k_r = \begin{cases}
-    \mathrm{Se}^l \big[ 1 - \big( 1 - \mathrm{Se}^\frac{1}{m} \big) \big]^2 & H_p < 0 \\
-    0 & H_p \geq 0
-  \end{cases}
-\end{equation}
-
-\section{Temperature \& Pressure Dependent Properties}
-
-
 
 \end{document}

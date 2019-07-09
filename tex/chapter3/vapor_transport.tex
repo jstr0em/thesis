@@ -1,0 +1,26 @@
+Vapor transport in porous media is described by \textit{Darcy's Law}.
+The vapor velocity depends on the pressure gradient in the soil, is proportional to the permeability of the soil matrix, and is inversely proportional to the viscosity of the fluid.
+
+\begin{equation}\label{eq:darcys_law_saturated}
+  \vec{u} = -\frac{\kappa}{\mu}\nabla p
+\end{equation}
+
+For Darcy's Law to be valid, two assumptions must be fulfilled:
+\begin{enumerate}
+  \item The fluid must be in the laminar regime, typically $\mathrm{Re} < 1$.
+  \item The soil matrix must be saturated with the fluid.
+\end{enumerate}
+In VI-modeling, the first assumption is fulfilled, but the second is not.
+Most of the contaminant vapor transport takes place in the partially saturated vadose zone and thus, \eqref{eq:darcys_law_saturated} needs modification.
+
+In partially saturated soils, a varying portion of the soil pores are available for vapor transport, with the rest being occupied by water, affecting the effective permeability of the soil.
+To model this, a relative permeability property, $k_r$, is introduced:
+\begin{equation}
+  \kappa_\mathrm{eff} = k_r \kappa_s
+\end{equation}
+$k_r$ is a dimensionless parameter that varies between 0 and 1, and $\kappa_s$ is the saturated, or simply the soil matrix permeability.
+
+This gives the modified Darcy's Law used in VI-modeling:
+\begin{equation}\label{eq:darcys_law}
+  \vec{u} = -\frac{k_r \kappa_s}{\mu}\nabla p
+\end{equation}
