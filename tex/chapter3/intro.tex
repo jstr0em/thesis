@@ -1,1 +1,12 @@
-Modeling is done as such...
+To model vapor intrusion (VI), a number of partial differential equations (PDEs) which describe the relevant physics must be solved.
+Many of these PDEs are also coupled in implicit and explicit ways, e.g. the PDE describing vapor flow in the soil affect the contaminant concentration, which in turn affect the indoor air concentration, which in turn also affects the contaminant concentration in the soil. 
+
+
+The indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given external factors.
+One could therefore assume that most of the effort in modeling VI should be spent to accurately represent the interior.
+This would be very impractical however, as building interiors are so diverse.
+Even if one would spend the time to model an interior, this would dramatically increase the number of mesh elements required to solve the model.
+Additionally, the air flow inside the building must be calculated, and even using a simplified version of Navier-Stokes, like Reynolds Averaged Navier-Stokes, the computational cost would be significant.
+For these reasons, the indoor air space is simply modeled as a continuously stirred tank (CST), and paradoxically becomes the simplest component of the VI model.\par
+
+Most of the effort will be spent to accurately model the physics in the soil underlying the building of interest.
