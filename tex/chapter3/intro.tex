@@ -8,19 +8,27 @@ Often it is impossible or difficult to conduct controlled studies of VI sites ma
 The previous chapter is proof of this as it is readily apparent that a multitude of VI models of varying complexity have been developed over the years, and has become an integral part of the scientific VI community.
 From the simple Johnson \& Ettinger one-dimensional model to full three-dimensional finite element models we see that the increased complexity of the model allowed for a greater number of VI topics and phenomena to be explored.\par
 
+% TODO: Write about that we use COMSOL, a little about FEM, and why we use COMSOL
+
 The development of the three-dimensional finite element models begin with a conceptual site model (CSM) of a VI site.
 In general when one develops models, it is best in the beginning to keep the model as simple as possible, and not to add overly complex features or excessive physics.
+As such, we begin with a very simple CSM which may be seen in Figure \ref{fig:csm}.\par
 
+This CSM features a residential building with a 10 by 10 m footprint, with a concrete foundation one meter below ground-surface (bgs).
+Along the perimeter of foundation there is a one cm wide breach, through the subsurface contaminants enter the house.
+Three meters below the foundation, there is a contaminated groundwater source, from which contaminants vapor continuously evaporate.
+The house is assumed to be depressurized relative to the atmosphere which creates a pressure gradient, allowing air to be pulled through the ground-surface, soil, and into the house - carrying some contaminants with it.
+The indoor air is also exchanged at a constant rate with the outside environment, which is the only way the contaminant leave the house.
+For simplicity we also assume that the soil is completely homogenous.\par
 
-% TODO: Integrate or remove paragraphs below
-To model vapor intrusion (VI), a number of partial differential equations (PDEs) which describe the relevant physics must be solved.
-Many of these PDEs are also coupled in implicit and explicit ways, e.g. the PDE describing vapor flow in the soil affect the contaminant concentration, which in turn affect the indoor air concentration, which in turn also affects the contaminant concentration in the soil.
+% TODO: This paragraph needs some more elaboration
+The next step is to choose the appropriate physics to accurately model the VI processes at this site.
+This is divided up into two steps.
+In the first we consider the indoor environment.
+In the second the soil surrounding the structure.\par
 
-The indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given external factors.
-One could therefore assume that most of the effort in modeling VI should be spent to accurately represent the interior.
-This would be very impractical however, as building interiors are so diverse.
-Even if one would spend the time to model an interior, this would dramatically increase the number of mesh elements required to solve the model.
-Additionally, the air flow inside the building must be calculated, and even using a simplified version of Navier-Stokes, like Reynolds Averaged Navier-Stokes, the computational cost would be significant.
-For these reasons, the indoor air space is simply modeled as a continuously stirred tank (CST), and paradoxically becomes the simplest component of the VI model.\par
-
-Most of the effort will be spent to accurately model the physics in the soil underlying the building of interest.
+\begin{figure} % TODO: Create figure
+  %\includegraphics{}
+  \caption{Example of a simple conceptual site model of a vapor intrusion site.}
+  \label{fig:csm}
+\end{figure}

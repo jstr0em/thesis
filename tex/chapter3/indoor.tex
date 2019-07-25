@@ -1,7 +1,21 @@
-The fundamental assumption of a CSTR is that any contaminant or chemical species entering, or inside the indoor air space (control volume), is perfectly mixed, i.e. there are no spatial gradients.
+The indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given external factors.
+One could therefore assume that most of the effort in modeling VI should be spent to accurately represent the interior.
+This would be very impractical however, as building interiors are so diverse.
+Even if one would spend the time to model an interior, this would dramatically increase the number of mesh elements required to solve the model.
+Additionally, the air flow inside the building must be calculated, and even using a simplified version of Navier-Stokes, like Reynolds Averaged Navier-Stokes, the computational cost would be significant.\par
 
-The indoor air space
-\begin{equation}\label{eq:cst}
+The indoor air space is implicitly modeled and the part of the model geometry that would be the house is instead an empty space. 
+
+as a continuously stirred tank reactor (CSTR), and paradoxically becomes the simplest component of the VI model.\par
+
+
+
+The fundamental assumption of a CSTR is that any contaminant or chemical species entering, or inside the indoor air space (control volume), is perfectly mixed, i.e. there are no spatial gradients, and is given by \eqref{eq:cstr}
+\begin{equation}\label{eq:cstr}
   V\frac{\partial c}{\partial t} = n - V A_e c + R
 \end{equation}
-Here $n$ is the contaminant entry rate into the building, $A_e$ is the air exchange rate, which determines the rate at which indoor contaminants are expelled, and $R$ can be the generation of contaminant vapor from an indoor source or sorption.
+Here $n$ is the contaminant entry rate into the building.
+$A_e$ is the air exchange rate, which determines the which portion of the indoor air is exchanged for a given time period, e.g. if $A_e$ is 0.5 per hour, half of the indoor air is exchanged over one hour.
+$R$ can be the generation of contaminant vapor from an indoor source or sorption, but is usually assumed to be zero.
+
+% TODO: Discussion about multi-compartments?
