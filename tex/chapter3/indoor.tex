@@ -1,23 +1,54 @@
-\section{The Indoor Environment}
+\section{The Indoor Environment}\label{sec:indoor}
 
 The indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given external factors.
 One could therefore assume that most of the effort in modeling VI should be spent to accurately represent the interior.
 This would be very impractical however, as building interiors are so diverse.
 Even if one would spend the time to model an interior, this would dramatically increase the number of mesh elements required to solve the model.
-Additionally, the air flow inside the building must be calculated, and even using a simplified version of Navier-Stokes, like Reynolds Averaged Navier-Stokes, the computational cost would be significant.\par
+Additionally, the air flow inside the building must be calculated, and even using a simplified version of Navier-Stokes, like large eddy simulation or Reynolds averaged, the computational cost would be significant.\par
 
-The indoor air space is implicitly modeled and the part of the model geometry that would be the house is instead an empty space.
-
-as a continuously stirred tank reactor (CSTR), and paradoxically becomes the simplest component of the VI model.\par
-
-
-
-The fundamental assumption of a CSTR is that any contaminant or chemical species entering, or inside the indoor air space (control volume), is perfectly mixed, i.e. there are no spatial gradients, and is given by \eqref{eq:cstr}
+To overcome this, the indoor environment is instead modeled as a continuously stirred tank reactor (CSTR).
+The fundamental assumption of a CSTR is that any contaminant or chemical species entering, or inside the indoor air space (control volume), is perfectly mixed, i.e. there are no spatial gradients, and is given by \eqref{eq:cstr}.
 \begin{equation}\label{eq:cstr}
-  V\frac{\partial c}{\partial t} = n - V A_e c + R
+  V\frac{\partial c_\mathrm{in}}{\partial t} = n - V A_e c + R
 \end{equation}
-Here $n$ is the contaminant entry rate into the building.
+Here $c_\mathrm{in}$ is the indoor air contaminant concentration in $\mathrm{mol/m^3}$.
+$n$ is the contaminant entry rate into the building in $\mathrm{mol/s}$.
 $A_e$ is the air exchange rate, which determines the which portion of the indoor air is exchanged for a given time period, e.g. if $A_e$ is 0.5 per hour, half of the indoor air is exchanged over one hour.
-$R$ can be the generation of contaminant vapor from an indoor source or sorption, but is usually assumed to be zero.
+$R$ can be used to simulate sorption of contaminants vapor in the indoor environment, and if this is not of interest it can simply be set to zero.
+Finally, $V$ is the volume of the building interior in $\mathrm{m^3}$.
+Typically this is set to only reflect the volume of the floor or rooms on top of the building foundation.\par
 
-% TODO: Discussion about multi-compartments?
+% TODO: Discussion about multi-compartments? Yeah, probably a good idea.
+
+The most important component of \eqref{eq:cstr} is of course determining the contaminant entry rate $n$, and is the most challenging portion of the modeling effort.
+The contaminant entry rate has two transport components, advective and diffusive which depends on three factors:
+\begin{enumerate}
+  \item The velocity of the contaminant vapors entering or exiting the structure though the foundation crack.
+  \item The contaminant vapor concentration in the near vicinity of the foundation crack.
+  \item The indoor air contaminant concentration itself.
+\end{enumerate}
+The advective transport due to the bulk motion of the contaminant vapors and the flux is given by \eqref{eq:advection}.
+\begin{equation}\label{eq:advection} % TODO: Check if this really is the correct form...
+  j_\mathrm{adv} = \vec{u} c
+\end{equation}
+The bulk motion of the contaminant vapor is given by the vector quantity $\vec{u}$ in $\mathrm{m/s}$ and $c$ is the contaminant vapor concentration.\par
+
+The diffusive transport is due to a concentration gradient, modified by a diffusion coefficient, and is given by Fick's law \eqref{eq:diffusion}
+\begin{equation}\label{eq:diffusion}
+  j_\mathrm{diff} = \nabla \cdot (D\nabla c)
+\end{equation}
+Where $\nabla$ is the del operator and $D$ is the diffusion coefficient in $\mathrm{m^2/s}$.
+In this formulation, $D$ does not have to be a constant and can depend on the coordinate or concentration.\par
+
+The implication of this is that \eqref{eq:cstr} has to be coupled with the equations that describe the contaminant concentration in the soil as their solutions are dependent on each other.
+How this is achieved will be covered in section \ref{sec:mass_transport} when discussing boundary conditions.\par
+
+The air exchange rate, $A_e$ is the parameter that determines the rate at which the contaminant vapors leave the indoor environment.
+Air infiltrate and exfiltrate through a building primarily via two mechanisms
+\begin{enumerate}
+  \item Through breaches and orifices in the building envelope, e.g. windows, slits, or other small opening.
+  \item Passive or active ventilation.
+\end{enumerate}
+With the exception of active ventilation, where air is mechanically forced to enter or exit the building, the driving force for the in-/exfiltration is driven by a pressure gradient between the indoor and outdoor environment, $p_\mathrm{in/out}$.\par
+
+% TODO: Write about how unfortunately you cannot easily predict Ae at the usual pressure differences. Only at higher ones via building leakage curves.

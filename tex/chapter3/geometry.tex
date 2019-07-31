@@ -37,6 +37,13 @@ The following steps are needed:
 \end{enumerate}
 At this point you will see that a quarter soil domain has been created, with an empty space that will represent a house with a foundation slab located 1 meter below ground-surface.\par
 
+The attentive reader will now of course notice that an entire house is missing from the model geometry.
+This is intentional, as explicitly modeling the interior of a building is too impractical for two primarily two reasons.
+First is that house interiors are simply too diverse for any explicit model to truly be representative in any general sense, not to mention how laborious it would be to create such a model interior.
+Secondly, the computational costs required to solve the air flow inside (necessary for accurate representation of contaminant transport/distribution inside) would be significant.
+The Navier-Stokes equation would need to be solved, and even using one of the simpler versions of it (large eddy simulation or Reynold's averaged) would impose a significant cost at questionable gain.
+Therefore the indoor air is modeled implicitly, which will be covered in detailed in section \ref{sec:indoor}.\par
+
 The foundation crack will be modeled as a 1 centimeter wide strip that spans the perimeter of the surface that represents the house foundation.
 To create the crack do the following:
 \begin{enumerate}
