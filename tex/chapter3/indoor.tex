@@ -1,3 +1,5 @@
+% TODO: Make sure every variable explanation following an equation is separated by a ; instead of , or ..
+
 \section{The Indoor Environment}\label{sec:indoor}
 
 The indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given external factors.
@@ -49,6 +51,39 @@ Air infiltrate and exfiltrate through a building primarily via two mechanisms
   \item Through breaches and orifices in the building envelope, e.g. windows, slits, or other small opening.
   \item Passive or active ventilation.
 \end{enumerate}
-With the exception of active ventilation, where air is mechanically forced to enter or exit the building, the driving force for the in-/exfiltration is driven by a pressure gradient between the indoor and outdoor environment, $p_\mathrm{in/out}$.\par
+With the exception of active ventilation, where air is mechanically forced to enter or exit the building, the driving force for the in-/exfiltration is driven by a pressure gradient between the indoor and outdoor environment, $p_\mathrm{in/out}$.
+These pressure gradient are primarily due to differences in indoor and outdoor temperatures and to wind striking the building.\par
+
+\subsection{Wind Effects}
+
+As the wind strikes a surface its velocity falls to zero, and the change in momentum is directly proportional to the change in pressure:
+\begin{equation}\label{eq:wind_pressure_uncorrected}
+  \Delta P = \frac{1}{2} \rho_\mathrm{air} u_\mathrm{wind}^2
+\end{equation}
+where $\Delta P$ is the change in pressure; $\rho_\mathrm{air}$ is the air density; and $u_\mathrm{wind}$ is the wind speed.\par
+
+In reality however, the pressure drop is not quite so straightforward due to several factors, e.g. building envelope contains various structures and may be shielded by other objects.
+To account for this, a drag or pressure coefficient $C_d$ is introduce to moderate the pressure drop:
+\begin{equation}\label{eq:wind_pressure}
+  \Delta P = C_d \frac{1}{2} \rho_\mathrm{air} u_\mathrm{wind}^2
+\end{equation}
+This coefficient is usually determined empirically from e.g. wind tunnel studies.
+
+\subsection{Temperature Effects}
+
+The pressure of any fluid under the influence of gravity varies with elevation and the density of the fluid determines the magnitude of this pressure.
+Air is a compressible fluid and its density depends on its temperature.
+Therefore, if you separate two air masses between a wall, with each at a difference temperature, a pressure difference across the wall be induced, i.e. the \textit{stack effect}.
+
+Assuming the ideal gas law applies and that the temperature on either side is constant then
+\begin{equation}
+  P = P_0 \exp{\Big( \frac{-M_\mathrm{air}gz}{RT} \Big)}
+\end{equation}
+determines the pressure variation.
+Where $P$ is the pressure; $P_0$ the reference pressure ($z=0$); $M_\mathrm{air}$ is the molar weight of air; $z$ is the elevation; $g$ is the acceleration due to gravity; $R$ is the gas constant; and $T$ is the temperature.\par
+
+% TODO: Finish writing about the simplification
+\subsection{Predicting Air Exchange Rate}
+
 
 % TODO: Write about how unfortunately you cannot easily predict Ae at the usual pressure differences. Only at higher ones via building leakage curves.
