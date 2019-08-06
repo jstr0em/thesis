@@ -7,7 +7,7 @@ Even if one would spend the time to model an interior, this would dramatically i
 Additionally, the air flow inside the building must be calculated, and even using a simplified version of Navier-Stokes, like large eddy simulation or Reynolds averaged, the computational cost would be significant.\par
 
 To overcome this, the indoor environment is instead modeled as a continuously stirred tank reactor (CSTR).
-The fundamental assumption of a CSTR is that any contaminant or chemical species entering, or inside the indoor air space (control volume), is perfectly mixed, i.e. there are no spatial gradients, and is given by \eqref{eq:cstr}.
+The fundamental assumption of a CSTR is that any contaminant or chemical species entering, or inside the indoor air space (control volume), is perfectly mixed, i.e. there are no spatial gradients, and is given by the ordinary differential equation (ODE) \eqref{eq:cstr}.
 \begin{equation}\label{eq:cstr}
   V\frac{\partial c_\mathrm{in}}{\partial t} = n - V A_e c + R
 \end{equation}
@@ -16,7 +16,8 @@ $n$ is the contaminant entry rate into the building in $\mathrm{mol/s}$;
 $A_e$ is the air exchange rate, which determines the which portion of the indoor air is exchanged for a given time period, e.g. if $A_e$ is 0.5 per hour, half of the indoor air is exchanged over one hour;
 $R$ can be used to simulate sorption of contaminants vapor in the indoor environment, and if this is not of interest it can simply be set to zero;
 Finally, $V$ is the volume of the building interior in $\mathrm{m^3}$.
-Typically this is set to only reflect the volume of the floor or rooms on top of the building foundation.\par
+Typically this is set to only reflect the volume of the floor or rooms on top of the building foundation.
+Since the indoor environment is does not explicitly "belong" anywhere in the COMSOL model, it is modeled using the "Global ODE" interface.\par
 
 % TODO: Discussion about multi-compartments? Yeah, probably a good idea.
 
@@ -131,5 +132,23 @@ Some examples of these are various combustion processes (fireplaces), ventilatio
 
 \subsection{Indoor Sources}
 
-There are mainly two types of potential indoor contaminant sources in VI.
-The first are 
+There are two types of indoor sources in VI.
+The first are various products and items that contain the contaminant of concern and continuously emit these.
+Some examples of these may be various cleaning products, degreasers, gasoline tanks, or even recently dry-cleaned clothing.
+These are usually not considered to be part of the VI phenomena themselves (even though they can pose health risks) but rather items that need to be removed in a VI investigation to prevent false positives.\par
+
+The second type are the walls, furniture, objects, or features inside the interior that sorb the contaminant vapors.
+While these are not \textit{sources} in the strict sense, they may never the less contribute to the overall contaminant exposure.
+How significant these secondary types of indoor sources are largely depend on the material.
+Some, such as cinderblock concrete have a very large capacity to hold contaminant vapors while others such as fabrics do not.\par
+
+% TODO: Add modeling about the first type of indoor sources here?
+
+\paragraph{Sorption Processes}
+
+Modeling the secondary type indoor sources (sorption onto materials) can be done with a simple equilibrium reaction:
+\begin{equation}\label{eq:sorption_rxn}
+  \mathrm{c^*} \underset{k_2}{\stackrel{k_1}{\rightleftharpoons}} \mathrm{c_{in}}
+\end{equation}
+
+% TODO: Finish this when you've progressed more with the paper
