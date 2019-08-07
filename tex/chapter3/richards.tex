@@ -1,6 +1,29 @@
+% TODO: You really need to sit down and wrap your head around all of this and how it's derived.
+
 \subsection{Water Flow in Unsaturated Porous Media}\label{sec:richards}
+
+The vadose zone or unsaturated zone is a region of soil between the top of the ground surface and the water table.
+In the vadose zone there are two fluid phases, one gas and the other liquid (usually air and water) inside the porous soil matrix giving a three phase system; only one fluid phase (gas or liquid) exist in the saturated zone.
+As a result, the transport properties in the vadose zone differ from that in a zone saturated where there are only two phases present - water and soil.\par
+
 
 
 \subsubsection{Soil-Water Potential}
 
+The driving force, or soil-water potential, for the filling and draining of pore water in soils are due to a pressure and a gravitational potential and given by $\phi$.
+
+
+The driving force for the pore water in the vadose zone is a negative pressure caused by the surface tension of the water.
+This phenomena is called \textit{capillary potential} or \textit{matrix potential}, $\psi$, which depends on the volumetric water content $\theta$ in the soil.
+
 \input{van_genuchten.tex}
+
+
+\subsubsection{Richard's Equation}
+
+\begin{equation}\label{eq:richards}
+  \rho \Big( \frac{C_m}{\rho g} + \mathrm{Se}S \Big) \frac{\partial p}{\partial t} +
+  \nabla \cdot \rho \Big( -\frac{\kappa_s}{\mu} k_r (\nabla p + \rho g \nabla D)\Big) =
+  Q_m
+\end{equation}
+Where $p$ is the capillary potential; $C_m$ is the specific moisture capacity; $\mathrm{Se}$ is the effective saturation; $S$ is the storage coefficient; $\kappa_s$ is the saturated permeability of the porous media; $\mu$ is the fluid viscosity; $k_r$ is the effective permeability; $\rho$ is the fluid density; $g$ is the acceleration of gravity; $D$ is the elevation or head; and $Q_m$ is a source term, a positive or negative value represent a source or sink respectively.\par
