@@ -6,20 +6,81 @@ The vadose zone or unsaturated zone is a region of soil between the top of the g
 In the vadose zone there are two fluid phases, one gas and the other liquid (usually air and water) inside the porous soil matrix giving a three phase system; only one fluid phase (gas or liquid) exist in the saturated zone.
 As a result, the transport properties in the vadose zone differ from that in a zone saturated where there are only two phases present - water and soil.\par
 
-
-
-\subsubsection{Soil-Water Potential}
+% TODO: This section needs serious work to make sure the nomenclature is consistently defined and referred to.
+\subsubsection{Soil-Water Potential and Retention Curve}
 
 The driving force, or soil-water potential, for the filling and draining of pore water in soils are due to a pressure and a gravitational potential and given by $\phi$.
+This phenomena is called \textit{capillary potential} or \textit{matrix potential}, $\psi$, which depends on the volumetric water content $\theta$ in the soil.\par
 
+Over the years, there has been a few attempts of characterizing the relationship between soil moisture content $\theta$ and soil water potential $\phi$ - a so-called soil water retention curve.
+Two common relationships have been proposed by Brooks and Corey in 1966\cite{brooks_properties_1966}, and another by van Genuchten in 1980\cite{van_genuchten_closed-form_1980}.
+Both of these approaches are semi-empirical and each is a function of the soil water potential with several fitting parameters.
+These parameters are specific to each soil type and usually are derived from laboratory experiments.
+In our VI models we chose to use the van Genuchten formulation for the simple reason that these have been historically used in VI modeling and the associated parameters are well-known for a variety of soils.\par
 
-The driving force for the pore water in the vadose zone is a negative pressure caused by the surface tension of the water.
-This phenomena is called \textit{capillary potential} or \textit{matrix potential}, $\psi$, which depends on the volumetric water content $\theta$ in the soil.
+In the van Genuchten formulation that we use, pressure head $H_p = \frac{p}{\rho g}$ is used as the dependent variable instead of the soil water potential $\psi$.
+Here $p$ is the fluid pressure; $\rho$ the fluid density; and $g$ is the acceleration of gravity.
+The fluid is here water.
+By definition the soil matrix is saturated with fluid when the pressure head is zero $H_p = 0$ and variably saturated for negative pressure heads, $H_p < 0$.
+The van Genuchten equations express four properties:
+\begin{align}
+  % saturation
+  \mathrm{Se} &=
+    \begin{cases}\label{eq:van_genuchten_saturation}
+      \frac{1}{(1 + |\alpha H_p|^n)^m} & H_P < 0 \\
+    1 & H_p \geq 0
+    \end{cases} \\
+  % soil moisture
+  \theta &=
+    \begin{cases}\label{eq:van_genuchten_soil_moisture}
+      \theta_r + \mathrm{Se}(\theta_s - \theta_r) & H_p < 0 \\
+      \theta_s & H_p \geq 0
+    \end{cases} \\
+  % specific moisture capacity
+  C_m &=
+    \begin{cases}\label{eq:van_genuchten_moisture_capacity}
+      \frac{\alpha m}{1-m}(\theta_s - \theta_r)\mathrm{Se}^{\frac{1}{m}}\big( 1 - \mathrm{Se}^{\frac{1}{m}} \big)^m & H_p < 0 \\
+    0 & H_p \geq 0
+    \end{cases} \\
+  % relative permeability
+  k_r &=
+    \begin{cases}\label{eq:van_genuchten_relative_permeability}
+      \mathrm{Se}^l \big[ 1 - \big( 1 - \mathrm{Se}^\frac{1}{m} \big) \big]^2 & H_p < 0 \\
+      0 & H_p \geq 0
+    \end{cases}
+\end{align}
 
-\input{van_genuchten.tex}
+\paragraph{Soil saturation}
 
+$\mathrm{Se}$ is the soil water saturation and ranges from 0 to 1, representing unsaturated and saturated respectively; $H_p$ is the pressure head; $\alpha$ and $n$ are two van Genuchten parameters, with $m = 1 - \frac{1}{n}$.
+
+\paragraph{Soil moisture content}
+
+$\theta$ is the volumetric soil moisture content or water-filled porosity; $\theta_s$ is the saturated porosity, i.e. the total porosity of the soil matrix; $\theta_r$ is the residual moisture content (even dry soils typically retain some moisture).
+The soil vapor or vapor-filled porosity is easily calculated by $\theta_g = \theta_s - \theta$.
+
+\paragraph{Specific moisture capacity}
+
+$C_m$ is the specific moisture capacity which dictates the change in $\theta$ with respect to changes in pressure $p$, i.e. $\frac{\partial \theta}{\partial p}$.
+
+\paragraph{Relative permeability}
+
+$k_r$ is the relative permeability and just like $\mathrm{Se}$ ranges from 0 to, representing the soil matrix being fully impermeable and permeable to a particular fluid.
+The formulation in \eqref{eq:van_genuchten_relative_permeability} is for water, but the vapor relative permeability is simple $1 - k_r$.\par
+
+In Figure \ref{fig:van_genuchten} the soil water retention curves for sandy loam soils are shown.
+Notice how the saturation is significantly higher slightly above the groundwater, this is called the capillary fringe and presents a significantly barrier to vapor transport, as we will see in future sections\par
+
+% TODO: Make figure and make sure the right soil is mentioned in the caption
+\begin{figure}[htb!]
+  %\includegraphics{van_genuchten.pdf}
+  \caption{Retention curves for sandy loam soil.}
+  \label{fig:van_genuchten}
+\end{figure}
 
 \subsubsection{Richard's Equation}
+
+Richard's equation 
 
 \begin{equation}\label{eq:richards}
   \rho \Big( \frac{C_m}{\rho g} + \mathrm{Se}S \Big) \frac{\partial p}{\partial t} +
