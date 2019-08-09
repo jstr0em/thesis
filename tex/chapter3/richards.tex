@@ -80,11 +80,27 @@ Notice how the saturation is significantly higher slightly above the groundwater
 
 \subsubsection{Richard's Equation}
 
-Richard's equation 
-
+The change in soil moisture through a soil domain is the sum of any change in flux of water in or out of the soil domain.
+In 1931 Lorenzo Richards\cite{richards_capillary_1931} developed an eponymous PDE that describes this.
+Richards' equation itself is an extension of Darcy's Law, which governs fluid flow in saturated media (more on this in section \ref{sec:darcys}).
 \begin{equation}\label{eq:richards}
   \rho \Big( \frac{C_m}{\rho g} + \mathrm{Se}S \Big) \frac{\partial p}{\partial t} +
   \nabla \cdot \rho \Big( -\frac{\kappa_s}{\mu} k_r (\nabla p + \rho g \nabla D)\Big) =
   Q_m
 \end{equation}
-Where $p$ is the capillary potential; $C_m$ is the specific moisture capacity; $\mathrm{Se}$ is the effective saturation; $S$ is the storage coefficient; $\kappa_s$ is the saturated permeability of the porous media; $\mu$ is the fluid viscosity; $k_r$ is the effective permeability; $\rho$ is the fluid density; $g$ is the acceleration of gravity; $D$ is the elevation or head; and $Q_m$ is a source term, a positive or negative value represent a source or sink respectively.\par
+Here $p$ is the capillary potential; $C_m$ is the specific moisture capacity; $\mathrm{Se}$ is the effective saturation; $S$ is the storage coefficient; $\kappa_s$ is the saturated permeability of the porous media; $\mu$ is the fluid viscosity; $k_r$ is the effective permeability; $\rho$ is the fluid density; $g$ is the acceleration of gravity; $D$ is the elevation or head; and $Q_m$ is a source term, a positive or negative value represent a source or sink respectively.\par
+
+In the VI model that we are developing we usually assume that there is no change in soil moisture content w.r.t. time, i.e. that it is at steady-sate, and that there is no source or sink present, greatly simplifying \eqref{eq:richards}.
+Since we're solving the PDE at steady-state, it is not that important to specify any initial values (although it can reduce computation time), but we need to specify a few boundary conditions to solve \eqref{eq:richards}.
+
+\paragraph{Boundary conditions}
+
+In the simplest case only three boundary conditions need to be specified.
+The first two are Dirichlet boundary conditions\footnote{A prescribed fixed value to the dependent value at the boundary.} where we specify the pressure to be zero at the water table boundary (bottom of the model) and at the ground surface the pressure head is equal the negative of the depth to the water table.
+The third is a no-flow boundary condition\footnote{A Neumann boundary condition.}, specifying that there is no soil moisture flux through these boundaries, is applied to all other boundaries.
+\begin{align}\label{eq:richards_bc}
+  p_\mathrm{water-table} &= 0 \; \mathrm{(Pa)}\\
+  p_\mathrm{ground-surface} &=  -z_\mathrm{water-table}\rho_\mathrm{water} g \; \mathrm{(Pa)} \\
+  \text{(All other)} -\vec{n}\cdot\rho_\mathrm{water}\vec{u} &= 0
+\end{align}
+Where $\rho_\mathrm{water}$ is the density of water; $z_\mathrm{water-table}$ is the depth of the water table relative to the ground surface; $g$ is the acceleration of gravity; $\vec{n}$ is the a boundary's normal vector; $\vec{u}$ is the velocity vector of the water moving in the soil matrix.\par
