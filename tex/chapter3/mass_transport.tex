@@ -1,5 +1,18 @@
 \subsection{Mass Transport in Unsaturated Porous Media}\label{sec:mass_transport}
 
+Mass transport of a chemical species occurs primarily through diffusive and advective transport and is typically governed by the advection-diffusion equation (sometimes -reaction is added)
+\begin{equation}
+  \frac{\partial c_i}{\partial t} + \nabla \cdot (-D \nabla c_i) + \vec{u} \cdot \nabla c_i = R_i
+\end{equation}
+where $c_i$ is the concentration of the chemical species; $t$ is time; $D$ is the diffusion coefficient; $\vec{u}$ is the bulk fluid velocity vector; and $R_i$ is a reaction term.
+As such the first term is the change of concentration in some control volume, the second and third terms are the diffusive and advective fluxes leaving or entering the control volume, and the fourth is whatever change in concentration due to chemical reactions.\par
+
+However, this governing equation is too simplistic to accurately model vapor contaminant transport in the vadose zone.
+As has been discussed before, the transport properties vary significantly in unsaturated porous depending on the soil matrix water saturation.
+The vadose zone is also a three-phase system, where at any given time some contaminant will be partitioned between the soil, vapor, and liquid phases.
+The contaminant will also move between these three phases through volatilization/solvation and sorption.
+To accurately model the mass transport of contaminants through the vadose zone, all of these phenomena must be accounted for.\par
+
 % TODO: Rewrite so c_i is the gas-phase instead
 \begin{equation}
   \frac{\partial}{\partial t} (\theta c_i) +

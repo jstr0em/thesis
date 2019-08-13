@@ -99,8 +99,8 @@ In the simplest case only three boundary conditions need to be specified.
 The first two are Dirichlet boundary conditions\footnote{A prescribed fixed value to the dependent value at the boundary.} where we specify the pressure to be zero at the water table boundary (bottom of the model) and at the ground surface the pressure head is equal the negative of the depth to the water table.
 The third is a no-flow boundary condition\footnote{A Neumann boundary condition.}, specifying that there is no soil moisture flux through these boundaries, is applied to all other boundaries.
 \begin{align}\label{eq:richards_bc}
-  p_\mathrm{water-table} &= 0 \; \mathrm{(Pa)}\\
-  p_\mathrm{ground-surface} &=  -z_\mathrm{water-table}\rho_\mathrm{water} g \; \mathrm{(Pa)} \\
-  \text{(All other)} -\vec{n}\cdot\rho_\mathrm{water}\vec{u} &= 0
+  &\text{Water table} &p = 0 \; \mathrm{(Pa)}\\
+  &\text{Ground surface} &p =  -z\rho g \; \mathrm{(Pa)} \\
+  &\text{Remaining} &-\vec{n}\cdot\rho_\mathrm{water}\vec{u} = 0
 \end{align}
-Where $\rho_\mathrm{water}$ is the density of water; $z_\mathrm{water-table}$ is the depth of the water table relative to the ground surface; $g$ is the acceleration of gravity; $\vec{n}$ is the a boundary's normal vector; $\vec{u}$ is the velocity vector of the water moving in the soil matrix.\par
+Where $\rho$ is the density of water; $z$ is the depth of the water table relative to the ground surface; $g$ is the acceleration of gravity; $\vec{n}$ is the a boundary's normal vector; $\vec{u}$ is the velocity vector of the water moving in the soil matrix.\par
