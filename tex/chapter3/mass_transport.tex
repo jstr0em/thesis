@@ -22,3 +22,37 @@ To accurately model the mass transport of contaminants through the vadose zone, 
   \nabla \cdot [(D_{D,i} + D_{eff,i}) \nabla c_i] +
   R_i + S_i
 \end{equation}
+
+
+\subsubsection{Boundary conditions}
+
+As always, some BC are necessary to be specified to solve the PDE governing the mass transport.
+To model the basic CSM, four different kinds of BCs are required, one for the contaminant source, a second for the sink, third for the entry rate (coupling) with the indoor environment, and fourth are the no flow BCs that have been applied in previous scenarios.
+
+\paragraph{Groundwater source}
+
+In our CSM contaminant vapors emanate from a homogenously contaminated groundwater source; contaminated with some $c_gw$ concentration.
+These contaminant vapors can be assumed to emanate from the groundwater according to Henry's Law and the product.
+The product of the liquid contaminant concentration and the dimensionless Henry's Law constant thus give the vapor contaminant at the interface between the vadose zone and water table.
+
+\paragraph{Contaminant sink}
+
+Any contaminant vapor that reaches the atmosphere is assumed to immediately become infinitely diluted, i.e. that the vapor contaminant here is zero.
+This is simplest modeled by setting the vapor contaminant concentration to zero at the ground surface boundary.
+
+\paragraph{Foundation crack entry}
+
+% TODO: TBD...
+
+\paragraph{Summary}
+
+The last BC is, as in the other cases, a no flow boundary and applied to the remaining boundaries.
+In summary the following BCs are used.
+\begin{align}\label{eq:mass_transport_bc}
+  &\text{Water table} &c = c_{gw} K_H \; \mathrm{(mol/m^3)} \\
+  &\text{Ground surface} &c = 0 \; \mathrm{(mol/m^3)} \\
+  &\text{Foundation crack} &x \\
+  &\text{Remaining} &-\vec{n}\cdot\vec{N} = 0 \; \mathrm{(mol/(m^2\cdot s))}
+\end{align}
+Since the CSM is a steady-state simulation the initial values is not important to specify, but can reduce computation time.
+If a transient simulation is run the initial values are very important and typically a steady-state solution is used as the initial values.\par
