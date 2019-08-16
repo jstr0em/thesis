@@ -1,14 +1,32 @@
 \section{Meshing}\label{sec:meshing}
 
-A mesh is a collection of small discrete elements that in combination create a larger geometry or domain and meshing is the process of generating a mesh.
-There are many different types of elements that can be used for meshing and choosing which ones to use depend primarily on the spatial dimensionality of the model, the particularities of the geometry, and the physics that we wish to model.
+A mesh is a collection of small discrete elements that in combination form a larger geometry or domain.
+Meshing is the process of generating a mesh.
+Meshing is perhaps one of the most important and challenging aspects of solving a FEM model and a well-constructed mesh is necessary for accurate and reliable results.\par
 
+In theory, an infinitely fine mesh will give the analytical solution to a PDE but obviously the computational costs would be infinite then as well; one must always balance the accuracy of the solution and computational resources.
+This balancing act is somewhat of an art and there are no easily defined rights or wrongs.
+However, there are general guidelines that are useful to keep in mind while meshing.
+But before we get into those it is worth to spend some more time on what a mesh is.\par
+
+The most fundamental unit of the mesh is the element(s) that comprise the mesh.
+There are many different types of elements that can be used for meshing and choosing which ones to use depend primarily on the spatial dimensionality of the model, the particularities of the geometry, and the physics that we wish to model.
 Obviously different element types are by necessity needed to model a 2D vs. 3D geometry; you cannot mesh a 3D geometry with 2D squares.
 This distinction is not very interesting and any lesson learnt about meshing in one of these dimensions is easily generalizable to the other.
-Thus, we will exclusively discuss the meshing of 3D geometries.\par
+Thus, we will exclusively discuss the meshing of 3D elements.\par
 
-To mesh a 3D geometry there are primarily four types of mesh elements available - the tetrahedral, cuboid, prism, and pyramid - see Figure \ref{fig:3d_elements}.
+There are primarily four types of 3D mesh elements available - the tetrahedral, cuboid, prism, and pyramid - see Figure \ref{fig:3d_elements}.
 These can be combined in various ways to represent any 3D geometry.
+The most general out of these is the tetrahedral and will approximate any geometry well.
+It is not always the most effective choice for meshing a geometry and another element type may be better suited.
+This is easiest illustrated with an example.\par
+
+Imagine that you are trying to simulate the laminar flow of some fluid through a pipe and been clever enough to realize that by virtue of symmetry only a wedge of the pipe is necessary to be explicitly modeled.
+We also realize that the flow through the pipe is going to primarily have a gradient in the direction of the flow.
+In this scenario, it might be beneficial to use prism elements rather than tetrahedrals.
+Furthermore we could also primarily make the mesh fine in the flow direction while keeping it relatively coarse in other directions.
+This would allow us to achieve a solution of high accuracy while still keeping the number of elements relatively small.\par
+
 
 % TODO: Add figure
 \begin{figure}
@@ -17,8 +35,7 @@ These can be combined in various ways to represent any 3D geometry.
   \label{fig:3d_elements}
 \end{figure}
 
-Meshing is perhaps one of the most important and challenging aspects of solving a FEM model and a well-constructed mesh is necessary for accurate and reliable results.
-But what makes makes a mesh well-constructed?
+
 
 
 \subsection{Mesh Study}
