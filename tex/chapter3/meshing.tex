@@ -21,13 +21,6 @@ The most general out of these is the tetrahedral and will approximate any geomet
 It is not always the most effective choice for meshing a geometry and another element type may be better suited.
 This is easiest illustrated with an example.\par
 
-Imagine that you are trying to simulate the laminar flow of some fluid through a pipe and been clever enough to realize that by virtue of symmetry only a wedge of the pipe is necessary to be explicitly modeled.
-We also realize that the flow through the pipe is going to primarily have a gradient in the direction of the flow.
-In this scenario, it might be beneficial to use prism elements rather than tetrahedrals.
-Furthermore we could also primarily make the mesh fine in the flow direction while keeping it relatively coarse in other directions.
-This would allow us to achieve a solution of high accuracy while still keeping the number of elements relatively small.\par
-
-
 % TODO: Add figure
 \begin{figure}
   %\includegraphics{}
@@ -35,7 +28,50 @@ This would allow us to achieve a solution of high accuracy while still keeping t
   \label{fig:3d_elements}
 \end{figure}
 
+Imagine that you are trying to simulate the laminar flow of some fluid through a pipe and been clever enough to realize that by virtue of symmetry only a wedge of the pipe is necessary to be explicitly modeled.
+We also realize that the flow through the pipe is going to primarily have a gradient in the direction of the flow.
+In this scenario, it might be beneficial to use prism elements rather than tetrahedrals.
+Furthermore we could also primarily make the mesh fine in the flow direction while keeping it relatively coarse in other directions.
+This would allow us to achieve a solution of high accuracy while still keeping the number of elements relatively small.\par
 
+This is of course a relatively simple example of how an alternative mesh element may be used.
+For complicated geometries may use all kinds of element shapes in various parts of its domain.
+These type of multi-element meshes can give significant computational saving but at the expense of often requiring significant user input to be generated.
+Sticking to one type of elements is often simpler as these can quickly and easily mesh geometries.\par
 
+Once we have chosen which element(s) to use to mesh our geometry we can move on to creating the mesh.
+This is done by passing on a series of instructions to a meshing algorithm.
+Here the user could, for instance, specify the maximum and minimum element sizes, max element growth rate, how finely small features or curves (typically quite difficult to mesh) should be meshed.
+These instructions can be specific to various parts of the model, e.g. much finer meshing resolution can be specified for an area of interest and vice versa.
+There are also a variety of specialty mesh features such as a mesh boundary layer available: adding finely spaced mesh layers along a boundary.
+How to use all of these tools effectively to mesh a geometry is why meshing can be one of the most challenging aspects of FEM modeling.\par
 
-\subsection{Mesh Study}
+\subsection{Mesh Study}\label{sec:mesh_study}
+
+How does one evaluate that a mesh is sufficiently fine?
+While there are various metrics that can be useful to determine the quality of a mesh, the most important one is to perform a mesh study.
+The purpose of a mesh study is to determine the convergence of some property as you increase the fineness of the mesh.\par
+
+To perform a mesh study you must first define an appropriate metric for the particular problem you want to solve.
+In vapor intrusion a good choice for this might be the indoor air contaminant concentration, as predicting human exposure is the ultimate goal of VI modeling.
+The next step is to determine which degree of accuracy is desired (convergence criteria).
+Create a mesh with the fewest, reasonable number of mesh elements, solve the model, and analyze the results.
+Iteratively:
+\begin{enumerate}
+  \item Remesh the model with a finer mesh.
+  \item Solve and analyze the results.
+  \item Plot the result vs. mesh number/ID.
+  \item Repeat until convergence is met.
+\end{enumerate}
+In step three we plot the result vs. i:th mesh, which is the simplest approach, but one could here instead use a variety of mesh metrics instead.
+The benefit of this would be that you could which improvement of which specific aspect of the mesh results in a better result, which may make meshing easier.
+But it can be difficult and usually it is sufficient to simply use your experience and expertise as a guide to determine that your mesh is improved.\par
+
+% TODO: Add figure
+\begin{figure}[htb!]
+  %\includegraphics{}
+  \caption{Example result of a mesh study.}
+  \label{fig:mesh_study}
+\end{figure}
+
+\subsection{Meshing The VI Model}
