@@ -65,7 +65,7 @@ Iteratively:
 \end{enumerate}
 In step three we plot the result vs. i:th mesh, which is the simplest approach, but one could here instead use a variety of mesh metrics instead.
 The benefit of this would be that you could which improvement of which specific aspect of the mesh results in a better result, which may make meshing easier.
-But it can be difficult and usually it is sufficient to simply use your experience and expertise as a guide to determine that your mesh is improved.\par
+But it can be difficult and usually it is sufficient to simply use your experience and expertise as a guide to determine that your mesh is improved where appropriate.\par
 
 % TODO: Add figure
 \begin{figure}[htb!]
@@ -75,3 +75,28 @@ But it can be difficult and usually it is sufficient to simply use your experien
 \end{figure}
 
 \subsection{Meshing The VI Model}
+
+Now that we know a little about meshing in general, we can move on and mesh our VI model geometry.
+The first choice we need to make is which type of element to use, and in order to do that we need to think about the gradients of the dependent variables.\par
+
+In Richards' equation, the relevant gradient is the capillary pressure gradient, which will go from the water table to the surface, i.e. relatively straight.
+The Darcy's Law pressure gradient will however not be so straight as we expect a vapor flow from the surface to the building through the foundation crack, forming some sort of arcing streamline; the pressure gradient will be aligned to this streamline.
+The concentration gradient in the mass transport will likewise have an irregular direction.\par
+
+Since many of these gradients intersect and go in different directions from each other it makes sense to use tetrahedral elements to mesh the geometry.
+The aspect ratio between the nodes of each tetrahedra are relatively similar which allows gradients from different directions to be better resolved.
+Tetrahedral elements are also convenient to use for their simplicity.\par
+
+Properly meshing our geometry can be a challenge due to the great range of geometric scale.
+The house and soil domains are on the order of meters while the foundation crack, which is the most important part of the model, is only a centimeter wide.
+Care must be taken to make sure that foundation crack is finely meshed with small elements (for accurate results) while using larger for the rest of the geometry (to save computation time), i.e. the mesh element size must vary.\par
+
+% TODO: Make sure that my statement regarding "most" mesh algorithms is true
+Precisely how this is achieved vary depending on the mesh algorithm that you use.
+However, most
+
+\begin{figure}[htb!]
+  %\includegraphics{}
+  \caption{Our meshed geometry.}
+  \label{fig:meshed_geometry}
+\end{figure}
