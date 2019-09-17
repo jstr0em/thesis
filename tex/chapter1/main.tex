@@ -65,19 +65,58 @@ The result of these samples is the same as indoor samples, they may only be used
 
 % Introducing MLE concept
 The combination of these line-of-evidence are usually required to prove that VI occurs; the presence of contaminant in the groundwater, in the soil-gas underneath the structure, and finally inside the structure would be good evidence that VI occurs.
-This multiple line-of-evidence (MLE) approach is necessary when conducting VI investigations and is recommended by the US EPA.
+This multiple line-of-evidence (MLE) approach is necessary when conducting VI investigations and is recommended by the United States Environmental Protection Agency (EPA).
 
-\section{Research Motivation}
-% 3. Motivate research
-
-
-
-
-\section{Numerical Modeling of Vapor Intrusion}
-% 4. Motivate modeling
+\section{Mathematical Modeling of Vapor Intrusion}
+% 3. Motivate modeling
 % - Deterministic vs. statistical modeling
 % - Benefits of modeling
 % - History of modeling (briefly)
+
+Compared to the days of Radon, mathematical modeling of VI has become an important and intrinsic part of VI investigations, both as a MLE and as a investigative tool.
+
+\section{Research Motivation}
+% 4. Motivate research
+
+Recently significant effort has been spent on studying VI.
+Some very notable examples of this are two VI impacted residential homes that were purchased for the sole purpose of conducting highly detailed and long-term studies of VI at these sites.
+A key motivator for these studies was to in particular study and understand the temporal variability of VI that has been found at many other sites.\par
+
+The first was a house located near Hill AFB in Utah, which was a co-financed project between Arizona State University (ASU) and the EPA.
+The principal investigators at the site was a research team lead by Dr. Paul Johnson from ASU and therefore this site is hereafter referred to as simply the ASU house.
+Detailed descriptions of the experimental setup at this house may be found in .% TODO: Add x et al. references here
+Suffice to say that this was a highly detailed study where high-frequency indoor air samples of various contaminants were collected in different parts of the house as well as soil-gas and groundwater samples in different locations and depths.
+Simultaneously tracer gas studies were continuously conducted to measure the building air exchange rate.
+Pressure differences between the indoor and outdoor as well as several meteorological metrics were also collected.\par
+
+The second house was located in Indianapolis, Indiana, and was purchased and invested solely by the EPA.
+Similar to the ASU house, this house was outfitted with multiple probes for sampling indoor, groundwater, and soil-gas contaminant concentration at various locations and at high frequency.
+Likewise a pressure differences and meteorological metrics were measured, amongst other things.
+These sites present a rich and invaluable dataset for understanding VI.\par
+
+% Discussing sewers and preferential pathways
+From the onset of the studies at the EPA and ASU houses, it was believed that the VI source was the contaminated groundwater underneath these structures.
+Later it was discovered that these sites both were impacted by what is now known as preferential pathways.
+A preferential pathway is a term that refers to a process or feature that facilitates the transport of vapor contaminants from a source into the building of concern.
+An example of this is subsurface pipe networks such as sewers, land drain, or other piping.\par
+
+At the ASU house, the preferential pathway was a sewer connected land drain that exited underneath the house (with the purpose of draining excess water underneath)\cite{guo_identification_2015}.
+For the EPA house, a leaky, house connected sewer pipe was the preferential pathway\cite{mchugh_evidence_2017}.
+In both of these cases it seems like the main sewer line had been infiltrated by contaminated groundwater and through the piping, a preferential pathway for the vapor contaminant was established.
+Both of these preferential pathways mainly introduced vapor contaminants in the near subsurface underneath, and were subsequently transported into the houses, but other studies show that contaminant vapors may be introduced from sewers through broken plumbing fixtures\cite{pennell_sewer_2013,nielsen_remediation_2017}.
+
+% Need to investigate impact and role of PPs better
+
+% Discussing the role of pressure
+
+
+% Seasonal trends
+
+% Adsorption
+
+% Use of CPM to deal with variability. How do PPs and adsorption in particular play into its applications?
+% - How much do we need to pressurize? How long? What affects these choices?
+% - Role of sorption in indoor and soil
 
 \section{Research Objective}
 % 5. Define research objective
@@ -86,7 +125,7 @@ This research's broad aim is to improve our understanding of the complex fate an
 The ultimate goal is to reduce the uncertainty in VI investigations, and to make these easier and cheaper to conduct.
 To achieve this we mathematically describe the processes that govern the fate and transport of VI from a first principles approach.
 These are implemented and numerically solved using a finite-element method (FEM) solver package - COMSOL Multiphysics, which generate deterministic models of VI scenarios.
-By combining these models with statistical analysis of high-resolution datasets from the two well-studied VI sites near Hill Air Force Base in Utah (called the ASU house from here on), and the EPA house in Indianapolis, Indiana, we gain an opportunity to explore the dynamic VI processes.\par
+By combining these models with statistical analysis of high-resolution datasets from the two well-studied VI sites, the ASU house and the EPA house, we gain an opportunity to explore the dynamic VI processes.\par
 
 These models and analysis are applied to understand the role that pressure fluctuations have on determining temporal variability, and how the preferential pathway discovered at the ASU house enhanced this influence.
 The influence the preferential pathway had at the EPA house is likewise investigated.
@@ -95,9 +134,17 @@ We also explore the role that contaminant sorption, both onto soil and various i
 Lastly, these findings are explored in relation to the application of the controlled pressure method (CPM), and the significance of their impact on effective use of CPM.\par
 
 \section{Outline}
+% TODO: Write about this when the chapters are moe or less done
 % 6. Thesis outline
 % - Chapter details
 % - Last chapter should be future work
 
+% Chapter 2: Review of VI models
+
+% Chapter 3: Implementation of our VI model
+
+% Chapter 4: ...
+
+% Chapter -1: Future work
 
 \end{document}
