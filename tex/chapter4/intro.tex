@@ -6,6 +6,7 @@ Of particular concern was the discovery that some sites were characterized by ac
 This meant that it was possible for a VI investigation to give a false-positive result, further complicating things.\par
 
 To address the growing concerns of temporal variability in VI, the EPA, together with Arizona State University (ASU), purchased a VI impacted building near Hill Air Force Base (AFB) in Utah.
+(The primary contaminant source of concern here was the TCE contaminated groundwater.)
 The purpose of this was to conduct a long-term high-resolution scientific inquiry, with which the rich dataset would reveal the nature of these temporal variabilities, and offer unprecedented insights into the VI phenomenon.
 Another key objective was to assess the viability of the controlled pressure method (CPM) as an investigative tool (but more on that later).\par
 
@@ -15,16 +16,16 @@ Many soil-gas and groundwater probes were placed at different locations and dept
 Indoor air sampling also took place in different parts of the building.\par
 
 The measurements, in particular indoor air contaminant concentration measurements, revealed what was perhaps one of the most significant temporal variabilities recorded at a VI site.
-Figure \ref{fig:asu_indoor_concentrations} shows this variability across the entire x year study period. % TODO: Add how many years it actually was (roughly)?
+Figure \ref{fig:asu_indoor_concentration} shows this variability across the entire 3.5 years study period.
 As can be seen, orders of magnitude of variability on both short- and long-term timescales were recorded at the site, causing even more concern about the nature of the variability.\par
 
-\begin{figure}[htb!] % TODO: Make figure and show research phase - CPM, no CPM etc
-  %\includegraphics[width=\textwidth]{asu_indoor_concentrations.pdf}
-  \caption{The temporal variability of indoor air contaminant concentrations recorded at the ASU house. Measurements were taken in the basement. }
-  \label{fig:asu_indoor_concentrations}
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{asu_indoor_concentration.pdf}
+  \caption{The temporal variability of indoor air contaminant concentrations recorded at the ASU house. Measurements were taken in the basement. The periods were the CPM system was on and off are marked.}
+  \label{fig:asu_indoor_concentration}
 \end{figure}
 
-The CPM was employed during the middle stages of the study, to see if and how the temporal variability would be reduced, this period is shown in Figure \ref{fig:asu_indoor_concentrations}.
+The CPM was employed during the middle stages of the study, to see if and how the temporal variability would be reduced, this period is shown in Figure \ref{fig:asu_indoor_concentration}.
 This had the desired effect and significantly reduced the variability, keeping the indoor air contaminant concentration relatively steady at the higher concentration observed during the "natural" or no-CPM phases.
 While this was a success, it didn't explain why there was so much variability during the non-CPM periods.\par
 
@@ -32,16 +33,19 @@ It was not until the latter part of the CPM study phase that a land drain undern
 The purpose of this land drain was to drain any water from the gravel filled sub-slab into the sewer (which it was connected to).
 The researchers dug out the land drain and fitted a valve on it, allowing them to turn it's influence on and off.\par
 
-The land drain was first turned off during the end of CPM phase of the study, dramatically decreasing the variability
+The land drain was first turned off during the end of CPM phase of the study, dramatically decreasing the indoor concentration, reaching concentrations that are more similar to the lower end of the concentrations during the natural period.
+We can also see that the indoor concentrations never reached the same high levels during the subsequent natural period (after the CPM period) as there were before when the land drain was open.
+This clearly shows the significant effect that the land drain had on the contaminant transport, during both natural and CPM periods, which is clearly shown in Figure \ref{fig:asu_concentration_boxplot}.\par
 
-
-% TODO: 2 pane subplot.
-% Left pane: Maybe zoom in to the CPM period here with a time series figure.
-% Right pane: Boxplot of CPM and no CPM periods concentations
-
-
-\begin{figure}
-  %\includegraphics[width=\textwidth]{}
-  \caption{}
-  \label{}
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{asu_boxplot_concentration}
+  \caption{Boxplot showing the log-10 transformed TCE concentrations at the ASU house. The CPM and natural periods, and the period before and after the land drain was closed are considered separately. The box signifies the interquartile range (IQR) of values, with the central line representing the median value, and the top and bottom of the box are the 25th and 75th percentiles. The whiskers extend to 1.5 times the IQR. Markers indicate outlier data points that fall outside the whiskers.}
+  \label{fig:asu_concentration_boxplot}
 \end{figure}
+
+The question then becomes, why did the land drain, hereafter referred to as simply a preferential pathway, so significantly change the nature of the VI site?
+Figure \ref{fig:asu_concentration_boxplot} clearly shows that when the preferential pathway was open, CPM did what was expected and maximized the indoor concentration.
+But after the preferential pathway was closed, CPM had a minimal effect on this, and the distributions of indoor concentration values are not so different from those during the post-CPM and post-preferential pathway period.\par
+
+In the VI field, it is widely held that the building pressurization relative to the ambient outdoor is a key driver of contaminant entry into VI impacted building.
+Since building pressurization fluctuations can occurs rapidly, this is a prime factor for investigating the transport dynamics of the preferential pathway.
