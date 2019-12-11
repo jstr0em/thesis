@@ -38,7 +38,7 @@ We can also see that the indoor concentrations never reached the same high level
 This clearly shows the significant effect that the land drain had on the contaminant transport, during both natural and CPM periods, which is clearly shown in Figure \ref{fig:asu_concentration_boxplot}.\par
 
 \begin{figure}[htb!]
-  \includegraphics[width=\textwidth]{asu_boxplot_concentration}
+  \includegraphics[width=\textwidth]{asu_boxplot_concentration.pdf}
   \caption{Boxplot showing the log-10 transformed TCE concentrations at the ASU house. The CPM and natural periods, and the period before and after the land drain was closed are considered separately. The box signifies the interquartile range (IQR) of values, with the central line representing the median value, and the top and bottom of the box are the 25th and 75th percentiles. The whiskers extend to 1.5 times the IQR. Markers indicate outlier data points that fall outside the whiskers.}
   \label{fig:asu_concentration_boxplot}
 \end{figure}
@@ -49,3 +49,24 @@ But after the preferential pathway was closed, CPM had a minimal effect on this,
 
 In the VI field, it is widely held that the building pressurization relative to the ambient outdoor is a key driver of contaminant entry into VI impacted building.
 Since building pressurization fluctuations can occurs rapidly, this is a prime factor for investigating the transport dynamics of the preferential pathway.
+Thus to examine the physical implications of such a preferential pathway we consider the relationship between the indoor air concentration and building pressurization, specifically indoor/outdoor pressure difference, for the periods when the preferential pathway was open and closed, the result of which is shown in Figure \ref{fig:asu_pressure_dependence}.\par
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{asu_pressure_dependence.pdf}
+  \caption{Regression plot showing the indoor/outdoor pressure difference dependence on indoor air concentration. Here the indoor air concentration is normalized to the groundwater source concentration, i.e. attenuation factor, and log-10 transformed. Data is placed in evenly spaced (but not sized) bins. The bars indicate the 95\% confidence intervals.}
+  \label{fig:asu_pressure_dependence}
+\end{figure}
+
+Based on this figure we see that the indoor air concentration has a much stronger correlation with building pressurization when the preferential pathway was open than it had when it was closed.
+This suggests that the presence of the preferential pathway significantly enhanced the advective transport potential at the site.
+However, we also see that the relationship between indoor air concentration and pressurization is not linear; a threefold increase in depressurization does not result in a threefold increase in indoor air concentration, but a much greater increase.
+This indicates that the preferential pathway does not merely enhance the airflow, leading to large advective transport, but also increases the contaminant concentration.\par
+
+Indeed, if we were to look at the indoor air concentration normalized to the near-foundation contaminant concentration (see Figure \ref{fig:asu_subslab_attenuation}) we can see that the attenuation is at times greater than unity.
+% Which proves that hte subsurface contaminant concentration was much higher during LD open and has huge spatial variability.
+
+\begin{figure}[htb!]
+  \includegraphics[width=\textwidth]{asu_subslab_attenuation.pdf}
+  \caption{TBD}
+  \label{fig:asu_subslab_attenuation}
+\end{figure}
