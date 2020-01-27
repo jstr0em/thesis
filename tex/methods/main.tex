@@ -1,0 +1,52 @@
+\documentclass[../thesis.tex]{subfiles}
+
+% graphics path
+\graphicspath{
+  {../../figures/chapter3/},
+  {./../figures/chapter3/}
+}
+
+\begin{document}
+\chapter{Developing Vapor Intrusion Models}
+
+\begin{abstract}
+\input{abstract.tex}
+\end{abstract}
+
+% TODO: Restructure to reflect the COMSOL workflow
+% - Keep main body simple
+% - Use appendices as building/lego blocks to add complexity, e.g. one appendix about how to model a PP, and just that.
+
+\input{methods/intro.tex}
+\input{methods/geometry.tex}
+\input{methods/indoor.tex}
+\input{methods/soil_physics.tex}
+\input{methods/meshing.tex}
+
+\section{Solver Configuration}
+
+
+\section{References}
+\begin{comment}
+Things to bring up:
+
+- Why is it beneficial to model VI?
+
+
+- Background on modeling in VI research
+-- History & modeling applications
+-- Limitations of other people's models
+* Should this come before or after my mathematical description of VI?
+
+- Mathematical description of VI modeling
+* Start with a non-technical description of a CSM and the processes/physics underlying it. A nice graph showing all of it (including labeled physics and fluxes) would be nice.
+
+- Short description of FEM
+-- COMSOL
+-- Basic mathematical concept
+-- Advantages/disadvantages of this approach compared to others, i.e. why pick FEM over other numerical schemes?
+-- Meshing
+\end{comment}
+
+
+\end{document}
