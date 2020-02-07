@@ -13,190 +13,26 @@ What do I want people to know after reading this?
 - ITS
 - CPM
 
-* Why is temporal and spatial variability a problem in VI? 
+* Why is temporal and spatial variability a problem in VI?
 \end{comment}
 
 \chapter{Introduction}
+% TODO: Think about if you want more subsections in background and variability issues.
 
+\input{introduction/background.tex}
+\input{introduction/variability_issues.tex}
+\input{introduction/proposed_solutions.tex}
+\input{introduction/problems_with_solutions.tex}
+\input{introduction/modeling.tex}
+\input{introduction/outline.tex}
+\begin{comment}
+\input{background.tex}
+\input{variability_issues.tex}
+\input{proposed_solutions.tex}
+\input{problems_with_solutions.tex}
+\input{modeling.tex}
+\input{outline.tex}
+\end{comment}
 
-\section{Indoor Air Quality Perspective}
-% 1. Historic/broad background of VI and indoor air quality in general
-% - Spend lots of time indoors
-% - Summary of various VI pollutants (graphic/table?)
-
-Concerns about air quality are as old as civilization itself, ranging from beliefs that disease is caused by bad air - a \textit{miasma}, to more recent concerns about exposure to combustion particulates.
-Since industrialization the number of potential hazardous pollutants has increased significantly, followed by increased concerns about air quality.
-At the same time, people now spend more time indoors now than ever before, with Americans spending up to 90\% of their waking time indoors\cite{klepeis_national_2001}.
-This change in human habitation has put a special emphasis on indoor air quality.
-
-Some early scientific inquiries into indoor air quality focused on pollutant sources that were generated in the home, such as heating and cooking systems.
-Increased levels of carbon monoxide, sulfur dioxide, and various nitrous oxides could be detected due to these systems\cite{craig_d._hollowell_combustion-generated_1976}.
-These types of pollutants are still relevant today, but of particular concern in developing countries\cite{world_health_organisation_who_2014}.
-
-Some indoor air pollutants may be emitted from building materials, such as asbestos from older types of insulation, or formaldehyde from pressed-wood products, and various petroleum or chlorinated compounds may be emitted from common household product. % TODO: Cite these examples
-Molds are another common indoor quality concern\cite{world_health_organisation_who_2009}.
-
-Indoor air quality may be significantly affected by external contaminant sources as well, with Radon being perhaps one of the most well-known cases of this.
-Radon is a radioactive gas produced by the natural decay of Uranium 238, which is commonly found in many rocks and minerals.
-These in turn are often found in the soil or bedrock and the Radon gas enter the overlying buildings, exposing the inhabitants.
-
-\section{Vapor Intrusion}
-% 2. Background on...
-% - How VI works (graphics/flowsheet)
-% - How VI site investigations are conducted
-% - Some of the current issues
-
-A recent addition to the myriad of indoor air quality concerns is vapor intrusion (VI) - a process that is similar to Radon intrusion.
-As with Radon intrusion, VI contaminants are typically originate from underneath a building, migrate through the soil, entering it, and exposing the inhabitants.
-VI is different from Radon intrusion because it is more broad and general; the contaminant sources are usually of anthropogenic origin, and not limited to the soil.
-As such, Radon intrusion can be thought of as a subset of VI, but they are typically considered separately.
-In VI, the primary contaminants of concern are chlorinated solvents, e.g. trichloroethylene (TCE), tetrachlorethylene (PCE), vinyl chloride, chloroform, and organic compounds, e.g. benzene.
-
-The prototypical VI scenario is one where groundwater has been contaminated with one or many of these contaminants.
-Contaminant vapors evaporate from the groundwater, and are transported through the soil into the overlying buildings through small cracks and breaches in the foundation.
-While this simple example is helpful for gaining a rudimentary understanding of VI, it fails to capture much of the complexities of an actual VI site.
-
-% Some issues with VI investigations
-Determining if vapor intrusion occurs at a house or structure is often difficult.
-One might be tempted to believe that taking an air sample inside the house would be sufficient, i.e. that vapor contaminant concentrations is over some threshold in the house is proof of VI; absence of contaminant vapors is proof of no VI.
-The reality is that indoor air samples can be problematic for a few reasons.
-Due to their distributive nature, the residents or owners of the structure may be unwilling to let indoor samples to be taken.
-Indoor air samples are also susceptible to false positives and negatives.
-
-% False positives
-Many common consumer products contain the same contaminants that is often of concern in VI.
-The presence of these contaminants in a house is thus not necessarily proof of VI but rather a line-of-evidence.
-Great care should be and is taken to remove any potential indoor contaminant sources before any VI investigation can begin (contributing to the distributive nature of these investigations).
-
-% False negatives
-There can be significant temporal variability of indoor contaminant concentrations and some sites may have "active" and "inactive" periods, thus the absence of indoor contaminant is not proof that VI is not occurring, but yet another a line-of-evidence.
-This temporal variability occurs on different time-scales as mean indoor contaminant concentrations often fluctuate across seasons, and may even significantly vary across weeks, days, or even within a day.
-
-% Some other investigative techniques used
-Another approach might be to collect groundwater and/or soil-gas samples, but this also has it's inherent issues as well.
-The presence of contaminant in the groundwater or surrounding soil-gas (even if found right underneath the foundation) is evidence that VI occurs.
-Likewise, the absence or low concentration of contaminants may only indicate that there is significant spatial variability in contaminant concentration or that the source has not been found (hidden preferential pathways may especially be issues in the latter case).
-The result of these samples is the same as indoor samples, they may only be used as a line-of-evidence for VI.
-
-% Introducing MLE concept
-The combination of these line-of-evidence are usually required to prove that VI occurs; the presence of contaminant in the groundwater, in the soil-gas underneath the structure, and finally inside the structure would be good evidence that VI occurs.
-This multiple line-of-evidence (MLE) approach is necessary when conducting VI investigations and is recommended by the United States Environmental Protection Agency (EPA).
-
-\section{Mathematical Modeling of Vapor Intrusion}
-% 3. Motivate modeling
-% - Deterministic vs. statistical modeling
-% - Benefits of modeling
-% - History of modeling (briefly)
-
-With the growing need to understand and more importantly - predict exposure to contaminant vapors at VI sites the range of available tools has subsequently increased.
-One such important tool has been the development of mathematical models that, based on the complex factors and processes that govern VI, allow deterministic predictions to be made.
-Over time mathematical modeling of VI has become an important and intrinsic part of VI investigations, both as a MLE and as a investigative tool.\par
-
-VI models have a wide range of potential applications, such as:
-\begin{itemize}
-  \item Designing experiments and interpretation of results.
-  \item Guiding site investigations and make sense of the findings.
-  \item Estimating indoor air quality in advance of construction.
-  \item Designing mitigation systems.
-\end{itemize}
-This is not an exhaustive list, and models are more or less widely used in these applications.
-As models become more advanced and validation continues, they capabilities will likewise increase.\par
-
-Johnson and Ettinger developed one of the first mathematical models of VI\cite{johnson_heuristic_1991}, based on earlier work by Nazaroff whom developed a model to predict Radon intrusion\cite{nazaroff_radon_1985}.
-The goal of these models was to provide heuristic screening level calculations, allowing the user to gain a rough idea of the degree of VI by specifying, e.g. soil type, building pressurization, air exchange rate, and groundwater contaminant concentration.
-The Johnson and Ettinger model is to date one of the most commonly used VI models and was implemented in an Excel spreadsheet and distributed on the EPA's website.\par
-
-Over time these models have become more advanced, moving from the one-dimensional Johnson and Ettinger model to modeling VI in two or three dimensions, incorporating more advanced physics, and allowing time-dependent simulations to be run.
-This advanced in modeling necessitated the use of numerical methods to be solvable.
-One of the more advanced and general examples of these models are the those developed by Bozkurt et al.\cite{bozkurt_simulation_2009}, Pennell et al.\cite{pennell_development_2009}, Shen et al.\cite{shen_numerical_2012}, Yao et al.\cite{yao_comparison_2011}, and Ström et al.\cite{strom_factors_2019}, which utilize the finite element method to simulate VI.
-A more detailed review of VI models will be presented in Chapter \ref{chapter:model_review}.\par
-
-
-\section{Research Motivation}
-% 4. Motivate research
-
-Recently significant effort has been spent on studying VI.
-Some very notable examples of this are two VI impacted residential homes that were purchased for the sole purpose of conducting highly detailed and long-term studies of VI at these sites.
-A key motivator for these studies was to in particular study and understand the temporal variability of VI that has been found at many other sites.\par
-
-The first was a house located near Hill AFB in Utah, which was a co-financed project between Arizona State University (ASU) and the EPA.
-The principal investigators at the site was a research team lead by Dr. Paul Johnson from ASU and therefore this site is hereafter referred to as simply the ASU house.
-Detailed descriptions of the experimental setup at this house may be found in .% TODO: Add x et al. references here
-Suffice to say that this was a highly detailed study where high-frequency indoor air samples of various contaminants were collected in different parts of the house as well as soil-gas and groundwater samples in different locations and depths.
-Simultaneously tracer gas studies were continuously conducted to measure the building air exchange rate.
-Pressure differences between the indoor and outdoor as well as several meteorological metrics were also collected.\par
-
-The second house was located in Indianapolis, Indiana, and was purchased and invested solely by the EPA.
-Similar to the ASU house, this house was outfitted with multiple probes for sampling indoor, groundwater, and soil-gas contaminant concentration at various locations and at high frequency.
-Likewise a pressure differences and meteorological metrics were measured, amongst other things.
-These sites present a rich and invaluable dataset for understanding VI.\par
-
-% Discussing sewers and preferential pathways
-From the onset of the studies at the EPA and ASU houses, it was believed that the VI source was the contaminated groundwater underneath these structures.
-Later it was discovered that these sites both were impacted by what is now known as preferential pathways.
-A preferential pathway is a term that refers to a process or feature that facilitates the transport of vapor contaminants from a source into the building of concern.
-An example of this is subsurface pipe networks such as sewers, land drain, or other piping.\par
-
-At the ASU house, the preferential pathway was a sewer connected land drain that exited underneath the house (with the purpose of draining excess water underneath)\cite{guo_identification_2015}.
-For the EPA house, a leaky, house connected sewer pipe was the preferential pathway\cite{mchugh_evidence_2017}.
-In both of these cases it seems like the main sewer line had been infiltrated by contaminated groundwater and through the piping, a preferential pathway for the vapor contaminant was established.
-Both of these preferential pathways mainly introduced vapor contaminants in the near subsurface underneath, and were subsequently transported into the houses, but other studies show that contaminant vapors may be introduced from sewers through broken plumbing fixtures\cite{pennell_sewer_2013,nielsen_remediation_2017}.
-
-% Need to investigate impact and role of PPs better
-The ASU house study demonstrated the significant role preferential pathways can play in VI, and their discovery is an important part of a VI investigation.
-But as of yet it is fairly poorly understood how and when a preferential pathway may play a significant role or not.
-By contrast to the ASU house, the significance of the preferential pathway at the EPA house is not as clear, and seem to have had quite different effects of the two respective sites.
-A lesson learnt from these two sites is that finding these preferential pathways is not always a trivial matter, and research into if and when preferential pathways matter can help by narrowing down the search for them.\par
-
-% Discussing the role of pressure
-One significant effect of the preferential pathway at the ASU house was that it greatly enhanced the advective potential at the site, making the house much more sensitive to changes in pressurization\cite{strom_factors_2019,guo_identification_2015,holton_temporal_2013}.
-This same strong association between the VI potential and building pressurization was not observed at the EPA house however, even with a preferential pathway present (again showing that their effect can vary significantly).
-Another site in San Diego, California, however, again showed very significant correlation between VI potential and building pressurization\cite{hosangadi_high-frequency_2017}.\par
-
-These varied associations between VI potential and building pressurization are not very well understood.
-Typically the building pressurization fluctuate across the span of a day and often exhibit seasonal trends - making pressurization a prime candidate in driving much of the temporal variability of VI.
-Therefore, an examination of which site characteristic less or increase a building's sensitivity to pressurization is necessary to bridge this gap.\par
-
-% Seasonal trends
-Building pressurization is not the only factor that exhibit seasonal trends; temperature, air exchange rate, rainfall, snow coverage, and groundwater depth all vary across time and often (depending on a site's climate) exhibit seasonal trends.
-Understanding these trends, and how they impact VI are crucial for collecting representative and dependable samples at a site.
-E.g. should one immediately collect indoor air samples after rain? Or is it more prudent to wait a few days? Or weeks? \par
-
-% Adsorption
-Many VI contaminants have the potential to sorb onto various common indoor materials and soils.
-However, so far it is relatively unknown how sorption processes affects VI as a whole.
-
-% Use of CPM to deal with variability. How do PPs and adsorption in particular play into its applications?
-% - How much do we need to pressurize? How long? What affects these choices?
-% - Role of sorption in indoor and soil
-
-\section{Research Objective}
-% 5. Define research objective
-
-This research's broad aim is to improve our understanding of the complex fate and transport of VI contaminants, with a particular focus on the dynamic processes that drive the temporal variability in VI.
-The ultimate goal is to reduce the uncertainty in VI investigations, and to make these easier and cheaper to conduct.
-To achieve this we mathematically describe the processes that govern the fate and transport of VI from a first principles approach.
-These are implemented and numerically solved using a finite-element method (FEM) solver package - COMSOL Multiphysics, which generate deterministic models of VI scenarios.
-By combining these models with statistical analysis of high-resolution datasets from the two well-studied VI sites, the ASU house and the EPA house, we gain an opportunity to explore the dynamic VI processes.\par
-
-These models and analysis are applied to understand the role that pressure fluctuations have on determining temporal variability, and how the preferential pathway discovered at the ASU house enhanced this influence.
-The influence the preferential pathway had at the EPA house is likewise investigated.
-Seasonal driving forces, and in particular how temperature and wind affect building pressurization and air exchange rate, and how these can be used to explain much of the long-term seasonal changes in VI potential can be explained by these.
-We also explore the role that contaminant sorption, both onto soil and various indoor materials, have on the transient response to pressure changes.
-Lastly, these findings are explored in relation to the application of the controlled pressure method (CPM), and the significance of their impact on effective use of CPM.\par
-
-\section{Outline}
-% TODO: Write about this when the chapters are moe or less done
-% 6. Thesis outline
-% - Chapter details
-% - Last chapter should be future work
-The thesis is divided up into X chapters...
-% Chapter 2: Review of VI models
-
-% Chapter 3: Implementation of our VI model
-
-% Chapter 4: ...
-
-% Chapter -1: Future work
 
 \end{document}
