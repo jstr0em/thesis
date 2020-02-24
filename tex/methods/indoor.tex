@@ -1,0 +1,71 @@
+% TODO: Maybe change c_g -> c_{g,ck} ?
+
+\subsection{The Indoor Environment}\label{sec:indoor}
+
+The indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given some external factors.
+The indoor environment is modeled implicitly as a continuously stirred tank reactor (CSTR).\par
+We assume that all contaminant entry (or exit) into the house occurs via the foundation crack.
+Once the contaminant enters the interior, it is instantly perfectly mixed, which is a key assumption of a CSTR.
+Contaminant expulsion occurs via air exchange with the outdoor environment, and is regulated by \textit{air exchange rate} $A_e$, which dictates which portion of the indoor air is exchanged with the outdoor for a given period of time.
+For instance, a common air exchange rate for a house is \SI{0.5}{\per\hour}, i.e. half of the indoor air is exchanged every hour.
+It should be noted that in this simple VI model implementation, we assume that there are no indoor sources nor that any sorption to/from any indoor materials occurs.
+Thus, the reaction term that would ordinarily be part of a CSTR is dropped (but is reintroduced in Chapter (TBD)) and the change in indoor contaminant concentration is thus given by \eqref{eq:cstr}. % TODO: Add chapter reference
+\begin{equation}\label{eq:cstr}
+  V_\mathrm{bldg}\frac{\partial c_\mathrm{in}}{\partial t} = n_\mathrm{ck} - V_\mathrm{bldg} A_e c_\mathrm{in}
+\end{equation}
+Here $c_\mathrm{in}$ [\si{\mol\per\metre\cubed}] is the indoor air contaminant concentration;
+$n_\mathrm{ck}$ [\si{\mol\per\second}] is the contaminant entry (or exit) rate into the building via the foundation crack;
+$A_e = \SI{0.5}{\per\hour}$ is the air exchange rate;
+Finally, $V_\mathrm{bldg} = \SI{300}{\metre\cubed}$ is the volume of the house interior (or basement in this case).\par
+
+A limitation of this approach is that we only consider one control volume or compartment, while in reality indoor contaminant concentrations can vary significantly between compartments, in particular between different floors.
+There are VI models that use multiple compartments, which in essence are just coupled CSTRs\cite{murphy_multi-compartment_2011}.
+Basements typically have higher indoor contaminant concentrations than other floors, so in this implementation we assume that our sole compartment is the house basement, which $V_\mathrm{bldg} = \SI{300}{\metre\cubed}$ reflects.\par
+
+Solving \eqref{eq:cstr} requires us to determine the contaminant entry and air exchange rate.
+Air exchange rates can vary quite significantly, and are a significant source of temporal variability in VI, a topic that will be further explored in Chapter (TBD). % TODO: Reference chapter
+However, they typically vary around relatively well-known values as air exchange rates are regulated in building codes.
+For residential homes, it is typical that air exchange rate is around $A_e = \SI{0.5}{\per\hour}$ and thus for simplicity we will choose this value.\par
+
+\paragraph{Contaminant entry into the building}
+
+Contaminant entry rates are significantly more difficult to determine, as they depend on air velocity through the foundation breach and the concentration gradient across it.
+The determination of these is the main point, and challenge of VI modeling.\par
+
+The contaminant entry $n_\mathrm{ck}$ is given by integrating the contaminant entry flux $j_\mathrm{ck}$ across the foundation crack boundary $A_\mathrm{ck}$.
+\begin{equation}
+  n_\mathrm{ck} = \int_{A_\mathrm{ck}} j_\mathrm{ck} dA
+\end{equation}
+The contaminant flux across the foundation crack is modeled as transport between two parallel plates and has an advective and a diffusive component.
+\begin{equation}
+  j_\mathrm{ck} = j_\mathrm{advection} + j_\mathrm{diffusion}
+\end{equation}
+Since indoor contaminant concentration is lower than they are in the soil or near foundation crack region a concentration gradient from the soil-gas to the indoor will be present.
+The interior of the crack is not explicitly modeled, but assumed to only contain air and thus we assume the diffusion coefficient is the same as in air.
+\begin{equation}
+  j_\mathrm{diffusion} = - \frac{D_\mathrm{air}}{L_\mathrm{slab}} (c_{in} - c_g)
+\end{equation}
+here $D_\mathrm{air} = \SI{7.2e-6}{\metre\squared\per\second}$ is the diffusion coefficient of TCE in air (but could be substituted for any contaminant of interest); % TODO: Make sure this is right
+$L_\mathrm{slab} = \SI{15}{\centi\metre}$ is the thickness of the foundation slab;
+$c_{in}$ [\si{\mol\per\metre\cubed}] is the indoor contaminant concentration;
+$c_g$ [\si{\mol\per\metre\cubed}] is the contaminant gas-phase concentration at the foundation crack boundary.\par
+
+Advective transport through the slab can occur in both directions, i.e. contaminants can be carried from the soil into the house and from the house into the soil\cite{holton_creation_2018}.
+The direction of this transport depend on the direction of the flow, with a positive sign indicating that airflow goes into the house.
+\begin{equation}
+  j_{advection} = \begin{cases}
+    u_{ck} c_g & u_{ck} \geq 0 \\
+    u_{ck} c_{in} & u_{ck} < 0
+\end{cases}
+\end{equation}
+here $u_{ck}$ [\si{\metre\per\second}] is the airflow velocity through the foundation crack.
+
+Thus the total contaminant transport through the foundation crack is given by \eqref{eq:contaminant_entry}.
+\begin{equation}\label{eq:contaminant_entry}
+  j_{ck} = \begin{cases}
+    u_{ck} c_g - \frac{D_\mathrm{air}}{L_\mathrm{slab}} (c_{in} - c_g) & u_{ck} \geq 0 \\
+    u_{ck} c_{in} - \frac{D_\mathrm{air}}{L_\mathrm{slab}} (c_{in} - c_g) & u_{ck} < 0
+\end{cases}
+\end{equation}
+Not only will \eqref{eq:contaminant_entry} be used to calculate the contaminant entry rate into house, but is a necessary boundary condition for calculating the contaminant concentration in the soil.
+However, as we see, \eqref{eq:contaminant_entry} is a function of both the soil-gas concentration at the foundation crack boundary $c_g$ and the indoor contaminant concentration $c{in}$, thus these two are coupled and needs to be solved simultaneously.\par

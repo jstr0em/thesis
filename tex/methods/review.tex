@@ -1,0 +1,50 @@
+\section{Review of Vapor Intrusion Models}\label{sec:model_review}
+
+Mathematical models of VI were from an early stage adopted by investigators and regulators alike.
+The primary purpose of these was to providence screening-level risk assessment, i.e. determine if a particular site likely to impacted by VI based upon specific site characteristics such as groundwater contaminant concentration measurements.
+This was necessary as VI sites are potentially numerous and a means to prioritize was needed.
+Since such models had successfully been used in radon intrusion, similar ones were, and still are, developed for VI\cite{u.s._environmental_protection_agency_oswer_2015}.\par
+
+The EPA has recommended the use of VI models as a screening risk assessment tool as well as a line-of-evidence in VI investigations in conjunction with field measurements\cite{u.s._environmental_protection_agency_oswer_2015}.
+Likewise, various VI models have been used in many European countries in similar applications\cite{provoost_accuracy_2009}.
+However, the main obstacle of using models in VI investigations has been, and still is, the difficulties of validating them.
+These difficulties stem from the lack of available comprehensive datasets of VI sites and the inability to change the CSM that underpins the development of many of the most widely used VI models, e.g. if a particular model assumes the only contaminant source is the groundwater, it will never perform well for a site that is characterized by a preferential pathway.
+Regardless, VI models offer a means to examine the underlying physics that drive VI and is therefore a valuable research tool.\par
+
+\subsection{Analytical Models}
+
+One of the first, and arguably one of the most well-used VI model was developed by \citeauthor{johnson_heuristic_1991}\cite{johnson_heuristic_1991}, the J\&E model, and was based on much of the modeling work by \citeauthor{nazaroff_predicting_1988}\cite{nazaroff_predicting_1988}.
+Here a VI scenario similar to the one presented here was used as a basis for their mode, i.e. a house overlying an infinitely contaminated groundwater source, where contaminant vapors enter through a foundation crack along the perimeter of the foundation.
+However, due they sought to develop an analytical model, and therefore certain physics was discarded to enable them to solve the associated PDE.\par
+
+One such is that contaminant transport from the groundwater source to the building foundation was assumed to occur solely through diffusion.
+This is a reasonable assumption, as we have seen airflow is very slow in the soil, and especially in the deeper parts of the soil, so in most scenarios, contaminant transport here will be dominated by diffusion.
+The contaminant diffusivity was likewise modified using Millington-Quirks model.
+However, in their implementation lacked a way to model the soil moisture content, which instead had to be supplied by the user.
+Multiple soil layers were supported and with sufficient knowledge or assumptions, and using these, effective diffusivities could be reasonably approximated.\par
+
+While diffusion was assumed to be the only transport mechanism in the soil, both advection and diffusion was assumed to contribute to contaminant entry into the building.
+The advective contaminant flow through the foundation crack was here determined using a modified version of Darcy's Law that had been developed previously by Nazaroff\cite{nazaroff_radon_1985} where the driving force was the pressure differential between the indoor and outdoor environments.
+However, this approach lacks the relative permeability term from van Genuchten, and requires user input to determine the effective soil permeability.
+Contaminant entry through the crack was modeled as transport between two parallel plates, and involved solving the one-dimensional advection-diffusion equation at steady-state.
+Indoor contaminant concentration was determined in a similar fashion as presented here, i.e. as a steady-state mass balance between the contaminant entry and expulsion, the latter which is controlled by air exchange rate.\par
+
+In 1998 the EPA implemented the J\&E model as a spreadsheet tool for screening risk, where the user could give a wide variety of input such as air exchange rate, building pressurization, groundwater contaminant concentration, define multiple soil layers with their associated permeabilities and porosities, etc.
+Thus, the model was adopted by investigators and regulators as a risk assessment screening tool\cite{u.s._environmental_protection_agency_oswer_2015}.
+However, recently many state regulatory agencies have begun to question the use of these sorts of models in VI investigations and currently are given relatively low weight when considering if a site is impacted by VI.\par
+
+Following the J\&E model, a wide variety of analytical models were developed.
+These were often similar to the J\&E model in many regards, and often used the same governing equations, but with modifications to accommodate different VI scenarios.
+For instance some would have contaminant entry via a crawl space instead of a foundation crack\cite{r._human_1994}, or include soil biodegradation\cite{anderssen_modelling_1997,hers_evaluation_2000}.
+\citeauthor{yao_review_2013}\cite{yao_review_2013} wrote a comprehensive review of VI models, discussing their advantages and disadvantages, and which type of scenarios they modeled.
+However, due to the analytical nature of these models, some physics was necessary to be omitted in order to develop an analytical solution to that particular problem; this is the inherent disadvantage of analytical VI models.\par
+
+\subsection{Numerical Modeling}
+
+Numerical models do not require the sacrifice of any physical phenomena to be solvable and can be solved in up to three-dimensions, while most analytical models are one-dimensional.
+Thus numerical models can offer a more detailed and generalized description of a wider range of VI scenarios.
+However, solving numerical models to a satisfactory accuracy can be challenging and often require some expertise on behalf of the user, and such can be less accessible compared to  the analytical spreadsheet models.
+But from a research perspective they are far more interesting for examining the physics driving VI.\par
+
+\citeauthor{abreu_effect_2005}\cite{abreu_effect_2005} developed one of the first numerical model of VI - the "ASU model".
+This model considered the same VI scenario as in the J\&E model and what has been presented here; an infinitely contaminated groundwater source with contaminant entry into the overlying building occurring through a perimeter foundation crack.

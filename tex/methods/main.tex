@@ -2,31 +2,68 @@
 
 % graphics path
 \graphicspath{
-  {../../figures/chapter3/},
-  {./../figures/chapter3/}
+  {../../figures/methods/},
+  {./../figures/methods/}
 }
 
 \begin{document}
-\chapter{Developing Vapor Intrusion Models}
+\chapter{Numerical Modeling of Vapor Intrusion}
 
-\begin{abstract}
-\input{abstract.tex}
-\end{abstract}
+\import{./}{abstract.tex}
 
 % TODO: Restructure to reflect the COMSOL workflow
 % - Keep main body simple
 % - Use appendices as building/lego blocks to add complexity, e.g. one appendix about how to model a PP, and just that.
 
+% TODO: Move model section as its own chapter.
+
+
+\import{./}{intro.tex}
+\import{./}{geometry.tex}
+\import{./}{physics.tex}
+\import{./}{indoor.tex}
+\import{./}{soil_moisture.tex}
+\import{./}{darcys_law.tex}
+\import{./}{soil_transport.tex}
+\import{./}{meshing.tex}
+\import{./}{solvers.tex}
+\import{./}{post_processing.tex}
+\import{./}{appendix.tex}
+
+\begin{comment}
+\input{intro.tex}
+\input{geometry.tex}
+\input{physics}
+\input{indoor.tex}
+\input{soil_moisture.tex}
+\input{darcys_law.tex}
+\input{soil_transport.tex}
+\input{meshing.tex}
+\input{solvers.tex}
+\input{post_processing.tex}
+
+\appendix
+\input{appendix}
+
 \input{methods/intro.tex}
 \input{methods/geometry.tex}
+% Physics section and rest subsections?
+\input{methods/physics}
 \input{methods/indoor.tex}
-\input{methods/soil_physics.tex}
+\input{methods/soil_moisture.tex}
+\input{methods/darcys_law.tex}
+\input{methods/soil_transport.tex}
 \input{methods/meshing.tex}
+\input{methods/solvers.tex}
+\input{methods/post_processing.tex}
+%\input{methods/review.tex}
 
-\section{Solver Configuration}
+\appendix
+\input{methods/appendix}
+\end{comment}
 
 
-\section{References}
+
 \begin{comment}
 Things to bring up:
 
