@@ -1,0 +1,43 @@
+\documentclass[12pt,twoside]{report}
+% structural packages
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+
+
+% packages for nicer/more complex floats
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{import}
+\usepackage{comment}
+
+
+% graphics/figures
+\usepackage{graphicx}
+
+% reference package
+\usepackage[style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+%\usepackage[sectionbib]{natbib}
+%\usepackage{chapterbib}
+
+
+% subfiles package
+\usepackage{subfiles}
+
+% math packages
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+% fancy header/footer settings
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{Understanding The Dynamics Of Vapor Intrusion Processes}
+\fancyfoot{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{Chapter \thechapter}
+\fancyfoot[CO,RE]{Jonathan G. V. Ström}
