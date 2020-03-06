@@ -12,7 +12,10 @@ open = data[data['LandDrain']=='Open']
 closed = data[data['LandDrain']=='Closed']
 
 sim = pd.read_csv('../../data/simulations/preferential_pathway.csv')
-sim = sim[sim['AirExchangeRate']==0.5]
+sim_open = sim[(sim['Pathway']=='Yes') & (sim['Gravel']=='Yes') & (sim['Contaminated']=='Yes')]
+sim_closed = sim[(sim['Pathway']=='No')]
+
+#sim = sim[sim['AirExchangeRate']==0.5]
 
 # number of bins to put data in
 x_bins = np.arange(-5, 5, 0.5)
@@ -34,10 +37,18 @@ sns.regplot(
 )
 
 sns.lineplot(
-    data=sim[(sim['Pathway']=='Yes') & (sim['Gravel']=='Yes') & (sim['Contaminated']=='Yes')],
+    data=sim_open[(sim_open['AirExchangeRate']==0.5)],
     x='IndoorOutdoorPressure',
     y='logAttenuationGroundwater',
     ax=ax,
+    color=colors[0],
+)
+
+ax.fill_between(
+    sim_open[sim_open['AirExchangeRate']==0.5]['IndoorOutdoorPressure'],
+    sim_open[sim_open['AirExchangeRate']==0.1]['logAttenuationGroundwater'],
+    sim_open[sim_open['AirExchangeRate']==0.9]['logAttenuationGroundwater'],
+    alpha=0.2,
     color=colors[0],
 )
 
@@ -53,10 +64,17 @@ sns.regplot(
 )
 
 sns.lineplot(
-    data=sim[sim['Pathway']=='No'],
+    data=sim_closed[(sim_closed['AirExchangeRate']==0.5)],
     x='IndoorOutdoorPressure',
     y='logAttenuationGroundwater',
     ax=ax,
+    color=colors[1],
+)
+ax.fill_between(
+    sim_closed[sim_closed['AirExchangeRate']==0.5]['IndoorOutdoorPressure'],
+    sim_closed[sim_closed['AirExchangeRate']==0.1]['logAttenuationGroundwater'],
+    sim_closed[sim_closed['AirExchangeRate']==0.9]['logAttenuationGroundwater'],
+    alpha=0.2,
     color=colors[1],
 )
 
@@ -82,4 +100,5 @@ labels.append('Prediction')
 
 ax.legend(handles=handles,labels=labels)
 
+plt.savefig('../../figures/preferential_pathway/modeling_result_air_exchange_rate.pdf')
 plt.show()
