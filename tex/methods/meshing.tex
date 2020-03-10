@@ -1,6 +1,6 @@
 \section{Meshing}\label{sec:meshing}
 
-The mesh in FEM model is the collection of small discrete elements make up the model geometry or domain.
+The mesh in FEM model is the collection of small discrete elements that make up the model geometry or domain.
 Meshing is the process of generating a mesh.
 Meshing is one of the most important aspects of FEM modeling as the mesh directly influences the accuracy of the solution; it is important that the various gradients are resolved by the mesh.
 However, designing a good mesh can be challenging as a finer mesh has a higher computational cost.
@@ -16,13 +16,17 @@ The most general 3D element is the tetrahedral and will approximate any geometry
 However, it is not always the most effective choice for meshing a geometry and another element type may be better suited.
 This is easiest illustrated with an example.\par
 
+% TODO Add figure of some elements
+
 Imagine that you are trying to simulate the laminar flow of some fluid in a pipe.
 Because of symmetry, only a wedge of the pipe needs to be explicitly modeled.
 Therefore, in this scenario, it might be beneficial to use prism elements rather than tetrahedrals, since these are already wedge shaped.
 
-The laminar pipe flow is also going to primarily have a gradient in the direction of the flow.
+The laminar pipe flow will have a gradient in the direction of the flow.
 Thus the mesh mostly only needs to be fine in the flow direction, while the mesh can be coarser in the orthogonal direction.
 Constructing a mesh on this basis would allow us to achieve a solution of high accuracy while still keeping the number of elements relatively small - all through clever mesh design.\par
+
+% TODO Add figure showing what this type of meshing looks like
 
 This is of course a relatively simple example and more complicated geometries may need all kinds of element for constructing a clever design.
 These type of multi-element meshes can give significant computational saving but at the expense of often requiring significant user input to be generated.
@@ -30,14 +34,13 @@ Sticking to one type of elements is often simpler as these can quickly and easil
 
 Meshing can be done manually, but is often performed by a meshing algorithm.
 The creation of these algorithms is a science in itself, but their use often involve passing some basic parameters to the algorithm.
-Here the user could, for instance, specify the maximum and minimum element sizes, max element growth rate, how finely small features or curves (typically quite difficult to mesh) should be meshed.
+Here the user could, for instance, specify the maximum and minimum element sizes, maximum element growth rate, how finely small features or curves (typically quite difficult to mesh) should be meshed.
 These instructions can be specific to various parts of the model, e.g. much finer meshing resolution can be specified for an area of interest and vice versa.
 There are also a variety of specialty mesh features such as a mesh boundary layer available: adding finely spaced mesh layers along a boundary.
 How to use all of these tools effectively to mesh a geometry is why meshing can be one of the most challenging aspects of FEM modeling.\par
 
 \subsection{Meshing The VI Model}
 
-Now that we know a little about meshing in general, we can move on and mesh our VI model geometry.
 The first choice we need to make is which type of element to use, and in order to do that we need to think about the gradients of the dependent variables.\par
 
 From van Genuchten's retention curves, we know there will be a large soil moisture gradient in the capillary zone, which will need a relatively fine mesh to be resolved.
@@ -68,26 +71,31 @@ A description of each parameter and its value can be seen in Table \ref{tbl:mesh
 
 \subsection{Boundary Layer Mesh}
 
-When posed with steep gradients in one particular direction at boundaries, as we are here, it is often useful to use a \textit{boundary layer mesh} at the impacted boundaries.
+When posed with steep gradients in one particular direction at boundaries, as we have here, it is often useful to use a \textit{boundary layer mesh} at the impacted boundaries.
 This is a type of mesh that introduces a dense layer of meshes along the normal direction from a boundary.
-The number of layers are supplied by the user, and in our case we will use 8 layers, but more could be added if needed.
+Boundary layer meshes are common features in meshing algorithms, and COMSOL's is no exception.\par
+
+The number of boundary layers are supplied by the user, and in our case we will use 8 layers, but more could be added if needed.
 The distance between each layer is determined by the size of the other elements in its vicinity, as well as the distance growth rate between each layer, which we set to 1.3, i.e. the distance increases by 30\% for each layer.
 Figure \ref{fig:mesh} shows our completed mesh.\par
 
 \begin{figure}[htb!]
   \centering
   \begin{subfigure}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{meshed_model.png}
+    \centering
+    \includegraphics[width=0.75\textwidth]{meshed_model.png}
     \caption{The darker perimeter around the foundation highlights the higher mesh density along the foundation crack.}
     \label{fig:meshed_geometry}
   \end{subfigure}
   \begin{subfigure}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{mesh_crack.png}
+    \centering
+    \includegraphics[width=0.75\textwidth]{mesh_crack.png}
     \caption{Close-up of the foundation crack mesh.}
     \label{fig:meshed_crack}
   \end{subfigure}
   \begin{subfigure}[b]{\textwidth}
-    \includegraphics[width=\textwidth]{mesh_boundary_layers.png}
+    \centering
+    \includegraphics[width=0.75\textwidth]{mesh_boundary_layers.png}
     \caption{Side-view highlighting the boundary layer mesh.}
     \label{fig:mesh_boundary_layers}
   \end{subfigure}

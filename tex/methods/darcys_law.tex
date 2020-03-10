@@ -1,25 +1,25 @@
 \subsection{Airflow In The Vadose Zone}\label{sec:darcys_law}
 
-In our VI scenario, the depressurized house induces an advective airflow from the ground surface, through the vadose zone, and into the house via the foundation crack, carrying contaminant vapors with it.
+In our VI scenario, the depressurized house induces an advective airflow from the ground surface, through the vadose zone, and into the house via a foundation crack, this flow carries contaminant vapors with it.
 This airflow is modeled using a modified version of Darcy's Law.
-The modification is made to account for the variable moisture content in the vadose zone, which is established in section \ref{sec:van_genuchten}.\par
+The modification is made to account for the variable moisture content in the vadose zone, which is discussed in section \ref{sec:van_genuchten}.\par
 
 Darcy's Law describes the flow of a fluid through a porous medium.
-This flow is driven by a pressure gradient, and its magnitude depends on the permeability of the porous medium and the fluids viscosity.
+This flow is typically driven by a pressure gradient, and its magnitude depends on the permeability of the porous medium and the fluid's viscosity.
 \begin{equation}\label{eq:darcys_law_saturated}
   \vec{u} = -\frac{\kappa}{\mu} \nabla p
 \end{equation}
 here $\vec{u}$ [\si{\m\per\second}] is the airflow velocity vector;
-$\kappa$ [\si{\metre\squared}] is the permeability of the porous media;
+$\kappa$ [\si{\metre\squared}] is the permeability of the porous medium;
 $\mu$ [\si{\pascal\second}] is the dynamic viscosity of the fluid;
-and $\nabla$ [\si{\pascal\per\metre}] is the pressure gradient.\par
+and $\nabla p$ [\si{\pascal\per\metre}] is the pressure gradient.\par
 
-This \eqref{eq:darcys_law_saturated} formulation of Darcy's Law assumes that the porous media is saturated with the fluid,\footnote{Darcy's Law also assumes that the flow is in the laminar regime, i.e. the Reynolds number $\mathrm{Re} < 1$.
+This \eqref{eq:darcys_law_saturated} formulation of Darcy's Law assumes that the porous medium is saturated with the transporting fluid,\footnote{Darcy's Law also assumes that the flow is in the laminar regime, i.e. the Reynolds number $\mathrm{Re} < 1$.
 Due to the small pressure gradients in most VI scenarios, this assumption is rarely unfulfilled, but if it is, then Brinkman's equation should be used instead.} % TODO: Source for Brinkmans equation
-hence the need to modify this expression.
-While porosity is not directly part of \eqref{eq:darcys_law_saturated}, it is an intrinsic property of the permeability $\kappa$ of the porous media; the variably saturated pores variably changes the permeability.
+hence the need to modify this expression when there are two fluid phases present.
+While porosity is not directly part of \eqref{eq:darcys_law_saturated}, it is an intrinsic property that determines the permeability $\kappa$ of the porous medium; the variably saturated pores change the air permeability.
 This variation in permeability is modeled using the relative permeability expression from van Genuchten's equation \eqref{eq:van_genuchten_relative_permeability}.
-The effective soil permeability is the product of the soil permeability and its relative permeability giving our modified Darcy's Law \eqref{eq:darcys_law_unsaturated}.
+The effective soil permeability is the product of the saturated soil permeability and its relative permeability giving our modified Darcy's Law \eqref{eq:darcys_law_unsaturated}.
 \begin{equation}\label{eq:darcys_law_unsaturated}
   \vec{u} = -\frac{(1-k_r)\kappa}{\mu} \nabla p
 \end{equation}
@@ -36,31 +36,27 @@ Inserting our modified Darcy's Law for the velocity gives \eqref{eq:vapor_transp
 where $\theta_g$ is the gas-filled porosity of the soil from \eqref{eq:gas_porosity};
 $\rho = \SI{1.225}{\kilogram\per\metre\cubed}$ is the density of air;
 and $\mu = \SI{18.5e-6}{\pascal\second}$ is the dynamic viscosity of air.
-Contaminant vapor concentrations are typically highly dilute in VI scenarios, and therefore we assume that the contaminant does not affect the transport properties of air.\par
+Contaminant vapor concentrations are typically very low in VI scenarios, and therefore we assume that the contaminant does not affect the transport properties of air.\par
 
 In order to solve \eqref{eq:vapor_transport} we need to define some boundary conditions.
-In our CSM, air is pulled from the atmosphere through the ground surface and into the building via the foundation crack.
+In our VI scenario, air is pulled from the atmosphere through the ground surface and into the building via the foundation crack.
 To model this only three boundary conditions are required.\par
 
 \paragraph{Boundary Conditions}
 
-The first is to define a pressure gauge, i.e. a reference point for where the pressure is zero, which is where air will be pulled from.
-This is the applied to the ground surface boundary.
-The second is that we apply the indoor/outdoor pressure difference (-5 Pa) to the foundation crack boundary.
+The first boundary condition defines a pressure gauge, i.e. a reference point for where the pressure is zero, and is where air will be pulled from.
+This is applied to the ground surface boundary.
+The second is that we apply the indoor/outdoor pressure difference (-5 Pa) to the foundation crack boundary, assuming that the indoor air pressure exists at the crack entrance at the soil interface.
 The third type is applied to all remaining boundaries and is a no flow boundary condition, indicating that no flow passes through these boundaries.
-We also make sure that we specify the symmetry planes present.
+This also applies to the symmetry planes present.
 \begin{align}
-  &\text{Ground surface} &p = 0 \; \mathrm{(Pa)} \\
-  &\text{Foundation crack} &p = p_\mathrm{in/out} = -5 \; \mathrm{(Pa)} \\
+  &\text{Ground surface} &p = \SI{0}{\pascal} \\
+  &\text{Foundation crack} &p = p_\mathrm{in/out} =\SI{-5}{\pascal} \\
   &\text{Remaining} &-\vec{n}\cdot\rho\vec{u} = 0
 \end{align}
 where $\vec{n}$ is the boundary normal vector.\par
 
 \paragraph{Initial Conditions}
 
-For steady-state problems, the initial conditions do not influence the solution.
-Transient simulations however, require initial conditions and these are assumed to be given by the steady-state solution.\par
-
-\paragraph{Basis function}
-
-A hat function is used as the basis function for solving Darcy's Law in FEM.\par
+For steady-state problems, initial conditions are not needed.
+Transient simulations however, require initial conditions and these are typically assumed to be given by some steady-state solution that exists before a transient disruption.\par
