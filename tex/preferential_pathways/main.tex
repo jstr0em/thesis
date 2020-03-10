@@ -2,49 +2,87 @@
 
 % graphics path
 \graphicspath{
-  {../../figures/chapter4/}
+  {../figures/preferential_pathway/},
+  {../../figures/preferential_pathway/}
 }
 
 % TODO: Hers et al. 2014 is an example of diffusion limited transport. Use it!
 
 \begin{document}
-\chapter{Preferential Pathways And Vapor Intrusion}
+\chapter{Preferential Pathways: Drivers Of Temporal And Spatial Variability In Vapor Intrusion}
 
-\begin{abstract}
-\input{abstract.tex}
-\end{abstract}
-
-
-\input{intro.tex}
+\import{./}{abstract.tex}
+\import{./}{intro.tex}
+\import{./}{modeling.tex}
+\import{./}{kriging.tex}
+\import{./}{results.tex}
+\import{./}{results2.tex}
 
 
 \begin{comment}
 
-Main point of this chapter:
-
-Demonstrate how and why subsurface preferential pathways can have such a significant effect on VI.
-
-Outline:
-
 Introduction:
-* How did we come to find out about PP?
-* Why should we care about them? I.e. what are the issues?
-* How do they work?
 
-Methods:
-* How do we model the PP?
-* How do we do the Kriging interpolation?
+Temporal variability issue in VI.
+ASU and Indie houses purchases to deal investigate aspects of this.
+Both sites revealed PPs.
 
-Results & Discussion:
+Examples of PPs:
+- Leaky pipe & long-distance sewer transport - Indie
+- Land drain - ASU house
+- Sewer type
+  - Pennell Boston version
+  - Danish study
 
-* Show how the model predicts the VI at the ASU house. (Main case)
-* Turn on and off the enhanced advective potential and contaminant availability to show their contributions.
-* Some other factors that affect PP "performance" in the main case. I.e. effect of gravel sub-base.
+ASU house in particularly interesting because of the closing of PP/LD.
+- What happened?
+  - Reduction in variability (figure)
+  - Reduction is sub-surface spatial variability (figure)
+  - Change in relationship between p_in and c_in (figure)
+- (3) allows us to mechanistically investigate what happened with models. Answer questions like:
+  - Why the change in p_in and c_in relationship?
+  - Which conditions give rise to the significant effect of a PP of this kind?
 
+p_in and c_in analysis at Indie shows a quite different (weaker) relationship (figure)
+- Why?
+  - Harder to model as we do not know as much of the PP
+  - Kriging of soil-gas data to give an idea of what went on.
+
+Method:
+
+ASU house:
+- Site description and subsequent model development (figure)
+  - Gravel sub-base
+  - Motivation for PP BCs
+    - Groundwater source concentration in pipe
+      - Infiltration (depth of sewer in relation to groundwater + happened at Indie)
+      - Guo manhole measurements
+    - Pressure gauge/air source (just simplest approach and many approaches could have been taken)
+
+Kriging:
+- I need to review this...
+
+Results:
+
+ASU house:
+- PP increased advective potential. Conditions:
+  - Contaminated PP
+  - Gravel sub-base
+  - Air source
+
+Indie:
+- A bit unclear, but Kriging shows:
+  - Sewer likely leaks somewhere under the front lawn.
+  - May explain the different behavior, i.e. the distance separation is a middle-ground between ASU pre and post closing of LD.
 
 Conclusion:
-* PPs need to enhance advective transport and introduce extra contaminants to be impactful (plus other factors). How common place these combination of factors are determine the concern for PPs.
-* Suggestions for how to deal/uncover PPs? Follow Danish recommendations. See if subsurface piping may be discovered a priori. Sample nearby manholes (likely to play some role). Might even use CPM.
+
+Screening for PPs should be routine part of VI investigations.
+
+Examples:
+- Danish suggestions (sample in sewers/manholes and behind water traps)
+- CPM could be useful
+  - Combined with covering manhole to see if the building communicates with the sewer
 
 \end{comment}
 
