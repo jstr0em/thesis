@@ -100,5 +100,5 @@ labels.append('Prediction')
 
 ax.legend(handles=handles,labels=labels)
 
-plt.savefig('../../figures/preferential_pathway/modeling_result_air_exchange_rate.pdf')
+plt.savefig('../../figures/preferential_pathways/modeling_result_air_exchange_rate.pdf')
 plt.show()

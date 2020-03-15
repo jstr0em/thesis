@@ -26,6 +26,6 @@ ax.set(
     title='Distribution of contaminant concentrations at the EPA house duplex',
     ylabel='$\\log_{10}{(c_\\mathrm{in})} \\; \\mathrm{(\\mu g/m^3)}$',
 )
-plt.savefig('../../figures/preferential_pathway/indie_concentration_boxplot.pdf')
+plt.savefig('../../figures/preferential_pathways/indie_concentration_boxplot.pdf')
 
 plt.show()

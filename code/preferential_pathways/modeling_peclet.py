@@ -50,5 +50,5 @@ ax.set(
 
 ax.legend()
 
-plt.savefig('../../figures/preferential_pathway/modeling_result_peclet.pdf')
+plt.savefig('../../figures/preferential_pathways/modeling_result_peclet.pdf')
 plt.show()

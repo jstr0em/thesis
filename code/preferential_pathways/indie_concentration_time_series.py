@@ -31,5 +31,5 @@ ax.set(
 )
 
 
-plt.savefig('../../figures/preferential_pathway/indie_concentration_time_series.pdf')
+plt.savefig('../../figures/preferential_pathways/indie_concentration_time_series.pdf')
 plt.show()

@@ -146,5 +146,5 @@ labels.append('Preferential pathway absent')
 ax4.legend(handles, labels, loc='center')
 
 plt.tight_layout()
-plt.savefig('../../figures/preferential_pathway/modeling_diurnal.pdf')
+plt.savefig('../../figures/preferential_pathways/modeling_diurnal.pdf')
 #plt.show()
