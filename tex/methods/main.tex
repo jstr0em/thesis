@@ -7,11 +7,12 @@
 }
 
 \begin{document}
-\chapter{Numerical Modeling of Vapor Intrusion}\label{chp:method}
+\chapter{Numerical Modeling of Vapor Intrusion}\label{chp:modeling}
 
-\import{./}{abstract.tex}
+\import{./}{summary.tex}
 
 \import{./}{intro.tex}
+\import{./}{fem.tex}
 \import{./}{geometry.tex}
 \import{./}{physics.tex}
 \import{./}{indoor.tex}
@@ -21,28 +22,6 @@
 \import{./}{meshing.tex}
 \import{./}{solvers.tex}
 \import{./}{post_processing.tex}
-\import{./}{appendix.tex}
-
-\begin{comment}
-Things to bring up:
-
-- Why is it beneficial to model VI?
-
-
-- Background on modeling in VI research
--- History & modeling applications
--- Limitations of other people's models
-* Should this come before or after my mathematical description of VI?
-
-- Mathematical description of VI modeling
-* Start with a non-technical description of a CSM and the processes/physics underlying it. A nice graph showing all of it (including labeled physics and fluxes) would be nice.
-
-- Short description of FEM
--- COMSOL
--- Basic mathematical concept
--- Advantages/disadvantages of this approach compared to others, i.e. why pick FEM over other numerical schemes?
--- Meshing
-\end{comment}
-
+\import{./}{review.tex}
 
 \end{document}

@@ -15,15 +15,15 @@ $\mu$ [\si{\pascal\second}] is the dynamic viscosity of the fluid;
 and $\nabla p$ [\si{\pascal\per\metre}] is the pressure gradient.\par
 
 This \eqref{eq:darcys_law_saturated} formulation of Darcy's Law assumes that the porous medium is saturated with the transporting fluid,\footnote{Darcy's Law also assumes that the flow is in the laminar regime, i.e. the Reynolds number $\mathrm{Re} < 1$.
-Due to the small pressure gradients in most VI scenarios, this assumption is rarely unfulfilled, but if it is, then Brinkman's equation should be used instead.} % TODO: Source for Brinkmans equation
+Due to the small pressure gradients in most VI scenarios, this assumption is rarely unfulfilled, but if it is, then Brinkman's equation should be used instead.}
 hence the need to modify this expression when there are two fluid phases present.
-While porosity is not directly part of \eqref{eq:darcys_law_saturated}, it is an intrinsic property that determines the permeability $\kappa$ of the porous medium; the variably saturated pores change the air permeability.
+While porosity is not directly part of \eqref{eq:darcys_law_saturated}, it is an intrinsic property that determines the permeability $\kappa$ of the porous medium; the degree of saturation in pores determines the air permeability.
 This variation in permeability is modeled using the relative permeability expression from van Genuchten's equation \eqref{eq:van_genuchten_relative_permeability}.
 The effective soil permeability is the product of the saturated soil permeability and its relative permeability giving our modified Darcy's Law \eqref{eq:darcys_law_unsaturated}.
 \begin{equation}\label{eq:darcys_law_unsaturated}
-  \vec{u} = -\frac{(1-k_r)\kappa}{\mu} \nabla p
+  \vec{u} = -\frac{k_r\kappa}{\mu} \nabla p
 \end{equation}
-Recall that by definition $k_r$ is the relative permeability of the soil to \textit{water} and thus $1-k_r$ is that to \textit{gas}.\par
+Recall that by definition $k_r$ is the relative permeability of the soil to \textit{air}, and thus $k_r\kappa$ form an effective permeability.\par
 
 To calculate the soil-gas velocity field in the vadose zone, we need a continuity equation, which for fluid flow is \eqref{eq:fluid_continuity}.
 \begin{equation}\label{eq:fluid_continuity}
@@ -40,15 +40,16 @@ Contaminant vapor concentrations are typically very low in VI scenarios, and the
 
 In order to solve \eqref{eq:vapor_transport} we need to define some boundary conditions.
 In our VI scenario, air is pulled from the atmosphere through the ground surface and into the building via the foundation crack.
-To model this only three boundary conditions are required.\par
+To model this only three boundary conditions are required.
+We also need to choose a basis function, and we use the COMSOL recommended "hat" here, which will be used to determine the pressure $p$ throughout the modeled domain.\par
 
 \paragraph{Boundary Conditions}
 
 The first boundary condition defines a pressure gauge, i.e. a reference point for where the pressure is zero, and is where air will be pulled from.
 This is applied to the ground surface boundary.
 The second is that we apply the indoor/outdoor pressure difference (-5 Pa) to the foundation crack boundary, assuming that the indoor air pressure exists at the crack entrance at the soil interface.
-The third type is applied to all remaining boundaries and is a no flow boundary condition, indicating that no flow passes through these boundaries.
-This also applies to the symmetry planes present.
+The third type of boundary condition is applied to all remaining boundaries and is a no flow boundary condition, indicating that no flow passes through these boundaries.
+This also applies to the symmetry planes present recalling that we are solving over only a quarter domain.
 \begin{align}
   &\text{Ground surface} &p = \SI{0}{\pascal} \\
   &\text{Foundation crack} &p = p_\mathrm{in/out} =\SI{-5}{\pascal} \\

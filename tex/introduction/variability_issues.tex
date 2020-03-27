@@ -1,53 +1,30 @@
-\begin{comment}
-Purpose is to demonstrate the issues that temporal and spatial variability causes in VI site investigations, and impress upon the reader the necessity to solve these.
-
-- State the general issues, i.e. harder to assess real human exposure, more expensive, etc.
-- Give examples in the literature and describe the situation. (1-2 examples for spatial/temporal respectively should suffice.)
-
-Topics to cover:
-
-Issues that confound VI investigations:
-* Indoor sources/false positives (problem with only indoor samples)
-* Sub-surface contaminant formation by indoor (sub-surface samples)
-* Groundwater samples (spatial variability & presence of contaminants here does not mean entry occurs)
-* Issues with preferential pathways
-  * Indie style (long distance transport of contaminants)
-  * Kelly style (plumbing fixtures)
-  * ASU style (+ Danish study?) (nearby sub surface features that are not readily apparent)
-* Seasonal aspect
-* Necessity of MLE
-  * Expensive and hard
-  * Need for more robust methods
-
-\end{comment}
-
 \section{Issues In Vapor Intrusion Investigations}
 
 % Some issues with VI investigations
 Determining if vapor intrusion occurs at a building is often difficult.
-One might be tempted to believe that collecting an indoor air sample inside the building would be sufficient, i.e. that if the vapor contaminant concentrations is over some threshold in the house, proves that IV occurs, and the absence of contaminant vapors is proof that no VI occurs.
-However, this approach is too simplistic and may yield false positives.\par % TODO: Source
+One might be tempted to believe that collecting an indoor air sample inside the building would be sufficient, i.e. that if the vapor contaminant concentrations is over some threshold in the house, this proves that VI occurs, and the absence of contaminant vapors is proof that no VI occurs.
+However, this approach is too simplistic and may yield false positives.\par
 
 % False positives
-Many common consumer products contain the same contaminants that are of concern in VI, and the presence in the home of e.g. a petroleum containing gasoline tank may be the culprit.
+Many common consumer products contain the same contaminants that are of concern in VI, and the presence in the home of e.g. a gasoline-containing storage vessel may be the culprit.
 Not all indoor contaminant sources are so obvious though, and many contaminants may be inadvertently introduced, such as by bringing home newly dry-cleaned clothing (a common source of PCE).
-Great care is taken to eliminate such indoor sources during formal VI investigations, but can be challenging.\par % TODO: Source
+Great care is taken to eliminate such indoor sources during formal VI investigations, but this can be challenging\cite{u.s._environmental_protection_agency_oswer_2015}.
 
-A compounding issue related to this is that many of the contaminants can sorb onto/into various materials and subsequently desorb for significant periods of time, potentially extending the influence of indoor source beyond their removal\cite{meininghaus_diffusion_2000,meininghaus_diffusion_2002}.
-This a phenomena, among other related issues with sorption, we will discuss in Chapter (TBD).\par % TODO: Reference chapter later
+A compounding issue related to this is that many of the contaminants can sorb onto/into various materials and subsequently desorb for significant periods of time, potentially extending the influence of indoor sources beyond their removal\cite{meininghaus_diffusion_2000,meininghaus_diffusion_2002}.
+This a phenomena, among other related issues with sorption, we will discuss in Chapter \ref{chp:sorption}.\par
 
 Since indoor air sampling may not alone prove that VI occurs, investigations usually involve further steps.
-One is to collect air samples right below the foundation of the building, and if contaminant vapors are found there, as well as in the indoor air, that is more compelling evidence that VI occurs.
-However, as work by \citeauthor{holton_creation_2018}\cite{holton_creation_2018} has shown, contaminant vapors in the indoor environment may migrate from inside the building to the subslab, creating a contaminant cloud in soil beneath the building that may persist for significant periods of time.\par
+One possibility is to collect air samples right below the foundation of the building, and if contaminant vapors are found there, as well as in the indoor air, that is more compelling evidence that VI occurs.
+However, as work by \citeauthor{holton_creation_2018}\cite{holton_creation_2018} has shown, contaminant vapors in the indoor environment may actually migrate from inside the building to the subslab, creating a contaminant cloud in soil beneath the building that may persist for significant periods of time.\par
 
 Collecting samples from the contaminant source, such as the groundwater underneath a building, to determine the presence of contaminants can be used as potential evidence of VI.
 However, even identifying such a potential source is not enough evidence of VI, as the presence of a contaminant source does not mean that the contaminant vapor actually enters the overlying building.
 \citeauthor{folkes_observed_2009}\cite{folkes_observed_2009} conducted a decade long study of VI sites in Redfield, Colorado, and a 19 month long study in New York showed that many of the sites, even though they were above a contaminated groundwater source, were not impacted by VI.\par
 
 Often investigators take samples from different locations, those already discussed as well as soil-gas samples, and compare the relative decrease in contaminant vapor concentration from the source to the indoor to establish what is termed a "completed pathway".
-This decrease is called \textit{attenuation} and is quantitively represented in concentration from one point to the next as an \textit{attenuation factor}.
-For example, the indoor contaminant concentration is divided by the contaminant concentration at the soil-gas groundwater interface.
-$\alpha$ is commonly used in this work we will often use a subscript to denote attenuation from one measurement point to another.
+This decrease is called \textit{attenuation} and is quantitatively represented in concentration from one point to the next as an \textit{attenuation factor}.
+For example, in one particularly widely used form of the attenuation factor, the indoor contaminant concentration is divided by the contaminant concentration at the soil-gas groundwater interface.
+$\alpha$ is commonly used in this work to denote attenuation factor and we will often use a subscript to denote attenuation from one measurement point to another.
 In the case of groundwater attenuation for instance, one would divide the indoor contaminant concentration by the groundwater contaminant vapor concentration (that is when the contaminant concentration is in equilibrium with air, e.g. Henry's Law).
 \begin{equation}
   \alpha_\mathrm{gw} = \frac{c_\mathrm{in}}{c_\mathrm{gw} K_H}
@@ -60,9 +37,11 @@ and $K_H$ is the dimensionless Henry's Law constant.\par
 Over time, the U.S. Environmental Protection Agency (EPA) has compiled data on attenuation factors relative to different source depths and types.
 Using these data, standards as to which attenuation factors are expected have been established to help guide investigators and regulator determine the VI risk.
 This is helpful, but often we are faced with VI sites that render these sort of standards difficult to use.
-% TODO: Add part about criticism about attenuation factors etc here. Also, be more specific, how is 0.03 derived? \par
+For instance, the EPA recommends that an attenuation from the subslab region to the indoor of $\alpha_\mathrm{subslab} \approx 0.03$ for determining if VI occurs.
+In reality, attenuation factor values can vary by orders of magnitude due to a variety of factors, and that these recommended values can therefore be too conservative\cite{yao_examination_2013}.\par
 
-Heterogeneity in soil, nonhomogeneous contaminant source concentration, as well as differences in the nature of the source (e.g. a contaminant spill in the soil itself vs. a leaky underground chemical tank), can all contribute to significant spatial variability in contaminant concentration at a site.
+Some of the factors influencing attenuation factors are soil heterogeneity, nonhomogeneous contaminant source concentrations, as well as differences in the nature of the source (e.g. a contaminant spill in the soil itself vs. a leaky underground chemical tank).
+These can all contribute to significant spatial variability in contaminant concentration at a site.
 A good example of this is seen in a study by \citeauthor{luo_spatial_2009}\cite{luo_spatial_2009} where contaminant concentration beneath a building foundation varied from 200 to less than 0.01 mg/L.
 \citeauthor{bekele_influence_2014}\cite{bekele_influence_2014} also found that TCE soil-gas concentration could vary by an order of magnitude underneath the foundation of another site.\par
 
@@ -75,15 +54,15 @@ A preferential pathway is a term used describe something permitting enhanced con
 There contaminated groundwater infiltrated into the sewer system a few blocks away from the site.\par
 
 Similarly, \citeauthor{guo_identification_2015}\cite{guo_identification_2015} studied a site in Layton, Utah, that was found to be impacted by a sewer connected land drain that allowed contaminant vapors to be transported to the near-slab region beneath a house (and close to a visible breach in the foundation).
-The results of this study and the role of the preferential pathway is a significant focus of this work and will be discussed in more detail in Chapter (TBD).\par
+The results of this study and the role of the preferential pathway is a significant focus of this work and will be discussed in more detail in Chapter \ref{chp:preferential_pathways}.\par
 
 \citeauthor{holton_temporal_2013}\cite{holton_temporal_2013} (same group as \citeauthor{guo_identification_2015}) demonstrated the very significant temporal variability in indoor contaminant concentrations that exist at some sites, where they found close to four orders of magnitude in variability during the multi-year study period.
 \citeauthor{hosangadi_high-frequency_2017}\cite{hosangadi_high-frequency_2017} studied another site in San Diego, California, that likewise showed orders of magnitude temporal variability, albeit on a shorter time scale.
-Likewise, the aforementioned site in Indianapolis exhibited significant temporal variability\cite{schumacher_fluctuation_2012}.\par
+Also, the aforementioned site in Indianapolis exhibited significant temporal variability\cite{schumacher_fluctuation_2012}.\par
 
-This temporal variability often has a seasonal component, and the highest indoor contaminant concentrations are usually found during the colder months of the year\cite{schumacher_fluctuation_2012,holton_temporal_2013}, although there are cases when the opposite is true. % TODO: See if you can find good source that shows VI is highest during summer
+This temporal variability often has a seasonal component, and the highest indoor contaminant concentrations are usually found during the colder months of the year\cite{schumacher_fluctuation_2012,holton_temporal_2013}, although there are cases when the opposite is true.
 \citeauthor{steck_indoor_2004}\cite{steck_indoor_2004} shows this at a radon impacted building in Minnesota, where the highest radon levels where observed during summer.
 Some authors such as \citeauthor{bekele_influence_2014}\cite{bekele_influence_2014} suggest that it may be necessary to collect samples at intervals across a full year, to account for all seasonal effects, to avoid mischaracterization of VI.\par
 
 The complexity and nuances of VI has made it necessary for a multiple lines-of-evidence (MLE) approach to be taken when determining if a building is impacted by VI\cite{u.s._environmental_protection_agency_oswer_2015,pennell_field_2016}.
-However, the complexities associated with this approach has prompted the development of new methodologies and techniques that can reduce the uncertainty and complexity associated with conducting VI site investigations.
+However, the complexities associated with this approach has prompted the development of new methodologies and techniques that can reduce the uncertainty and complexity associated with conducting VI site investigations.\par

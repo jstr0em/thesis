@@ -8,7 +8,7 @@ Since such models had successfully been used in radon intrusion, similar ones we
 The EPA has recommended the use of VI models as a screening risk assessment tool as well as a line-of-evidence in VI investigations in conjunction with field measurements\cite{u.s._environmental_protection_agency_oswer_2015}.
 Likewise, various VI models have been used in many European countries in similar applications\cite{provoost_accuracy_2009}.
 However, the main obstacle of using models in VI investigations has been, and still is, the difficulties of validating them.
-These difficulties stem from the lack of available comprehensive datasets of VI sites and the inability to change the CSM that underpins the development of many of the most widely used VI models, e.g. if a particular model assumes the only contaminant source is the groundwater, it will never perform well for a site that is characterized by a preferential pathway.
+These difficulties stem from the lack of available comprehensive datasets of VI sites and the inability to change the conceptual site model (CSM) that underpins the development of many of the most widely used VI models, e.g. if a particular model assumes the only contaminant source is the groundwater, it will never perform well for a site that is characterized by a preferential pathway.
 Regardless, VI models offer a means to examine the underlying physics that drive VI and is therefore a valuable research tool.\par
 
 \subsection{Analytical Models}
@@ -20,14 +20,16 @@ However, due they sought to develop an analytical model, and therefore certain p
 One such is that contaminant transport from the groundwater source to the building foundation was assumed to occur solely through diffusion.
 This is a reasonable assumption, as we have seen airflow is very slow in the soil, and especially in the deeper parts of the soil, so in most scenarios, contaminant transport here will be dominated by diffusion.
 The contaminant diffusivity was likewise modified using Millington-Quirks model.
-However, in their implementation lacked a way to model the soil moisture content, which instead had to be supplied by the user.
+However, their implementation lacked a way to model the soil moisture content, which instead had to be supplied by the user.
 Multiple soil layers were supported and with sufficient knowledge or assumptions, and using these, effective diffusivities could be reasonably approximated.\par
 
 While diffusion was assumed to be the only transport mechanism in the soil, both advection and diffusion was assumed to contribute to contaminant entry into the building.
 The advective contaminant flow through the foundation crack was here determined using a modified version of Darcy's Law that had been developed previously by Nazaroff\cite{nazaroff_radon_1985} where the driving force was the pressure differential between the indoor and outdoor environments.
 However, this approach lacks the relative permeability term from van Genuchten, and requires user input to determine the effective soil permeability.
 Contaminant entry through the crack was modeled as transport between two parallel plates, and involved solving the one-dimensional advection-diffusion equation at steady-state.
-Indoor contaminant concentration was determined in a similar fashion as presented here, i.e. as a steady-state mass balance between the contaminant entry and expulsion, the latter which is controlled by air exchange rate.\par
+Indoor contaminant concentration was determined in a similar fashion as presented here, i.e. as a steady-state mass balance between the contaminant entry and expulsion, the latter which is controlled by air exchange rate.
+A major drawback of this model is its one-dimensional nature, which forces all of the contaminant released from groundwater beneath a building to enter that building.
+That is, no lateral transport of contaminant could be included.\par
 
 In 1998 the EPA implemented the J\&E model as a spreadsheet tool for screening risk, where the user could give a wide variety of input such as air exchange rate, building pressurization, groundwater contaminant concentration, define multiple soil layers with their associated permeabilities and porosities, etc.
 Thus, the model was adopted by investigators and regulators as a risk assessment screening tool\cite{u.s._environmental_protection_agency_oswer_2015}.
@@ -37,7 +39,7 @@ Following the J\&E model, a wide variety of analytical models were developed.
 These were often similar to the J\&E model in many regards, and often used the same governing equations, but with modifications to accommodate different VI scenarios.
 For instance some would have contaminant entry via a crawl space instead of a foundation crack\cite{r._human_1994}, or include soil biodegradation\cite{anderssen_modelling_1997,hers_evaluation_2000}.
 \citeauthor{yao_review_2013}\cite{yao_review_2013} wrote a comprehensive review of VI models, discussing their advantages and disadvantages, and which type of scenarios they modeled.
-However, due to the analytical nature of these models, some physics was necessary to be omitted in order to develop an analytical solution to that particular problem; this is the inherent disadvantage of analytical VI models.\par
+However, due to the analytical nature of these models, some physics had to be omitted in order to develop an analytical solution to that particular problem; this is the inherent disadvantage of analytical VI models.\par
 
 \subsection{Numerical Modeling}
 
@@ -46,5 +48,53 @@ Thus numerical models can offer a more detailed and generalized description of a
 However, solving numerical models to a satisfactory accuracy can be challenging and often require some expertise on behalf of the user, and such can be less accessible compared to  the analytical spreadsheet models.
 But from a research perspective they are far more interesting for examining the physics driving VI.\par
 
+\subsubsection{Abreu and Johnson Model.}
+
 \citeauthor{abreu_effect_2005}\cite{abreu_effect_2005} developed one of the first numerical model of VI - the "ASU model".
-This model considered the same VI scenario as in the J\&E model and what has been presented here; an infinitely contaminated groundwater source with contaminant entry into the overlying building occurring through a perimeter foundation crack.
+This model considered the same VI scenario as in the J\&E model and what has been presented here; an infinitely contaminated groundwater source with contaminant entry into the overlying building occurring through a \SI{1}{\milli\metre} perimeter foundation crack.
+The Abreu model was a three-dimensional model developed using a finite difference approach.\par
+
+Abreu used a similar mathematical description to the one presented here, i.e. used Darcy's Law to characterize flow of the soil-gas, the advection-diffusion equation for contaminant soil transport, the indoor environment was modeled as a CSTR, and the expression for contaminant entry into the building was the one developed in the original J\&E model.
+Biodegradation was also supported in their model.\par
+
+A key difference between the Abreu model and this one was that they do not simulate the effect of soil moisture as a function of elevation above groundwater.
+Instead, different soil moisture content would either be defined by the user for the entire soil domain, or for specific layers - very much like in the J\&E model.
+Thus, contaminant transport in the soil would be less well described.\par
+
+The Abreu model was used in a collaborative project with the EPA to investigate a wide range of VI topics.
+For instance, they investigated the effect of other buildings adjacent to a VI impacted building, how a laterally located groundwater source (i.e. the source is not directly below the building) affect contaminant entry, and combinations of these.
+They also considered finite sources in transient simulations, effect of an impermeable ground cover (like a sidewalk) around a building, and many more.
+However, a limitation of their study here was that they only considered sandy soils.\par
+
+\subsubsection{The Brown Model}
+
+A new addition to the family of VI models was the predecessor to the finite element model presented here.
+This 3D model was originally developed by \citeauthor{pennell_development_2009}\cite{pennell_development_2009} - the Brown model.
+In terms of governing equations and mathematical description of VI, it was quite similar to the Abreu model.
+Specifically, soil-gas airflow was again modeled using Darcy's Law, soil contaminant transport with the advection-diffusion equation, the indoor as a CSTR, and expression for contaminant entry into the building was the one from the J\&E model.
+The FEM nature of the model meant that heterogenous soil conditions could easily be modeled.
+Another benefit of this model was that it was able to run transient, or time-dependent simulations.
+However, this model did not calculate soil moisture content and its effect on contaminant transport.\par
+
+Investigating various heterogenous soil conditions was the topic of one of the first works using this model by \citeauthor{bozkurt_simulation_2009}\cite{bozkurt_simulation_2009}.
+They investigated how different soil layers of different properties alter the soil-gas contaminant concentration profiles.
+Their findings reinforced the importance of accurately characterizing the geology underneath a VI impacted in the development of its conceptual site model.
+In particular, clay layers in the soil were found to have a particularly profound effect on soil-gas contaminant concentrations.\par
+
+\citeauthor{yao_vapor_2011}\cite{yao_vapor_2011} used the same model to investigate how "capping" around a building affects soil-gas contaminant concentrations, e.g. how does a sidewalk affect contaminant concentration profiles.
+Using this they showed that caps in close proximity to a building can have a significant effect on soil-gas contaminant concentrations.
+For instance, buildings with very shallow foundations but were surrounded by an impermeable pavement, had relatively higher indoor contaminant concentrations than buildings without paving but whos foundations were a few meters bgs.
+Some other VI investigated by Yao et. al. was to explain the order of magnitude variability in attenuation factors in the EPA database\cite{yao_examination_2013-1}, oxygen limited biodegradation of VOCs in soils\cite{yao_estimation_2014}, and the effect of modeling other contaminant entry pathways other than a perimeter crack\cite{yao_simulating_2013}, where it was concluded that for the "classic" modeled VI scenario, the location or shape of the crack has little impact on overall VI.\par
+
+\citeauthor{shen_impacts_2016}\cite{shen_impacts_2016} used the Brown model to study the effect of time-varying soil-gas entry (i.e. volumetric air flow) and air exchange rate.
+Here they showed that these variations can significantly contribute to variations in indoor contaminant concentrations.
+Air exchange rate could under some circumstances contribute to roughly an order of magnitude, while soil-gas entry more than that.\par
+
+\subsubsection{CVI2D and PVI2D}
+
+\citeauthor{verginelli_excel-based_2016}\cite{verginelli_excel-based_2016} developed a steady-state two-dimensional analytic VI model.
+Here they considered the "classic" VI scenario with a free-standing building, surrounded by open ground, with a perimeter crack, and a groundwater source.
+A solution to the presented governing equations was established using the Schwarz–Christoffel mapping method.
+This model comes in two versions, one for primarily chlorinated solvents - chlorinated vapor intrusion tool 2D (CVI2D).
+The other mainly deals with petroleum contaminants and VOCS, and supports (oxygen limited) biodegradation - petroleum vapor intrusion tool 2D (PVI2D).
+These tools have been well received, in particular by the Chinese regulatory community, where they are often use to assess potential VI risk at brownfield sites prior to new construction.\par

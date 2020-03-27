@@ -9,19 +9,19 @@ It is also apparent how this pressure field induces a airflow from the ground su
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.75\textwidth]{model_pressure.png}
-  \caption{Pressure field from Darcy's Law with associated airflow streamlines.}
+  \caption[Modeled Darcy's pressure field in soil]{Pressure field from Darcy's Law with associated airflow streamlines.}
   \label{fig:model_pressure}
 \end{figure}
 
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.75\textwidth]{model_concentration.png}
-  \caption{Contaminant concentration in the soil, normalized to groundwater concentration and log-transformed, with transport streamlines.}
+  \caption[Modeled contaminant concentration in soil]{Contaminant concentration in the soil, normalized to groundwater concentration and log-transformed, with transport streamlines.}
   \label{fig:model_concentration}
 \end{figure}
 
 The contaminant concentration in the soil, normalized to the groundwater source concentration and log-transformed, with the contaminant flux streamlines, is examined in Figure \ref{fig:model_concentration}.
-Here see that far away from the house, the contaminant vapor simply diffuse straight from the groundwater source to the atmosphere, while these accumulate underneath the house, which acts as a diffusion blocker.
+Here see that far away from the house, the contaminant vapor simply diffuse straight from the groundwater source to the atmosphere, while beneath the house foundation, contaminant vapors accumulate because the foundation acts as a diffusion blocker.
 Based on those streamlines we can conclude that the advective component of the flux is very here small.
 Perhaps surprisingly, we do not see a significant advective transport downwards along the wall of the house.
 However, considering that the soil type is sandy loam, airflow velocities are expected to be small.\par
@@ -32,21 +32,21 @@ To make sense of this, we can inspect the horizontal diffusive flux, divided by 
 \begin{equation}
   \frac{j_\mathrm{diff,y-direction}}{|j_\mathrm{total}|}
 \end{equation}
-to see what portion of the total transport the diffusive horizontal represents here.
-The results of this is shown in Figure \ref{fig:model_horizontal_diff}, where see that the horizontal diffusive flux in the left direction accounts for 80\% of the total flux magnitude, as indicated by -0.8. % TODO Explain this better
+to see what portion of the total contaminant flux transport the diffusive horizontal represents here.
+Figure \ref{fig:model_horizontal_diff} shows that the horizontal contaminant transport underneath the foundation is in fact driven by the large contaminant concentration gradient between the region underneath and outside the house foundation.
 This shows the power of modeling and how it can reveal things that at first seem intuitively correct, but in fact are not.\par
 
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.75\textwidth]{model_velocity_crack.png}
-  \caption{Airflow velocity [\si{\milli\metre\per\hour}] near the foundation crack with associated its streamlines.}
+  \caption{Airflow velocity $\vec{u}_g$ [\si{\milli\metre\per\hour}] near the foundation crack with associated its streamlines.}
   \label{fig:model_velocity_crack}
 \end{figure}
 
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.75\textwidth]{model_transport_flux_y.png}
-  \caption{Horizontal diffusive flux component of the magnitude of the total flux. 1 here would indicates that all of the contaminant transport is due to diffusion, and occurs solely in the rightwards direction.}
+  \caption[Analysis of horizontal diffusion flux.]{Horizontal (y-axis) diffusive flux component normalized to the magnitude of the total flux. A value of 1 here indicates that the total contaminant transport flux is due to diffusion, while 0 would indicate the opposite - that all contaminant transport is due to advection. The sign signifies the direction, with positive and negative values indicating a flux in the rightward and leftward direction respectively. E.g. a value of -0.8 indicates that the 80\% of the magnitude of the contaminant transport is due to horizontal (along the y-axis) diffusion, and occurs leftward.}
   \label{fig:model_horizontal_diff}
 \end{figure}
 

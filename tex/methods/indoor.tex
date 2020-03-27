@@ -1,15 +1,16 @@
-% TODO: Maybe change c_g -> c_{g,ck} ?
-
 \subsection{The Indoor Environment}\label{sec:indoor}
 
 The impacts on the indoor air space is perhaps the most important part of modeling VI, as the goal of these models ultimately is to predict indoor exposure given some external factors.
-The indoor environment is, however, only modeled implicitly as a continuously stirred tank reactor (CSTR).\par
-We assume that all contaminant entry into the house occurs via the foundation crack.
+The indoor environment is, however, only modeled implicitly as a continuously stirred tank reactor (CSTR).
+We assume that all contaminant entry into the house occurs via a foundation crack.
+It has been shown in other modeling work that results are not overly sensitive to the nature and position of the actual foundation breach\cite{yao_simulating_2013}, so we do not need to be overly concerned about the nature of the crack - the key feature is the overall area that it presents for contaminant entry.
 Once the contaminant enters the interior, it is instantly perfectly mixed, which is a key assumption of a CSTR.
 Contaminant expulsion occurs via air exchange with the outdoor environment, and is regulated by \textit{air exchange rate} $A_e$, which dictates what fraction of the indoor air is exchanged with outdoor air over a given period of time.
-For instance, a common air exchange rate for a house is \SI{0.5}{\per\hour}, i.e. half of the indoor air is exchanged every hour.
+For instance, a common air exchange rate for a house is $A_e = \SI{0.5}{\per\hour}$, i.e. half of the indoor air is exchanged every hour.
+The impacts of air exchange rate will be explored in Chapter \ref{chp:preferential_pathways}.\par
+
 It should be noted that in this simple VI model implementation, we assume that there are no indoor sources nor that any sorption of contaminant to/from any indoor materials occurs.
-Thus, the reaction term that would ordinarily be part of a CSTR is dropped (but is reintroduced in Chapter (TBD)) and the change in indoor contaminant concentration is thus given by \eqref{eq:cstr}. % TODO: Add chapter reference
+Thus, the reaction term that would ordinarily be part of a CSTR is dropped (but is reintroduced in Chapter \ref{chp:sorption}) and the temporal change in indoor contaminant concentration is thus given by \eqref{eq:cstr}.
 \begin{equation}\label{eq:cstr}
   V_\mathrm{bldg}\frac{\partial c_\mathrm{in}}{\partial t} = n_\mathrm{ck} - V_\mathrm{bldg} A_e c_\mathrm{in}
 \end{equation}
@@ -23,7 +24,7 @@ There are VI models that use multiple compartments, which in essence are just co
 Basements typically have higher indoor contaminant concentrations than other floors, so in this implementation we assume that our sole compartment is the house basement, which $V_\mathrm{bldg} = \SI{300}{\metre\cubed}$ reflects.\par
 
 Solving \eqref{eq:cstr} requires us to determine the contaminant entry and air exchange rates.
-Air exchange rates can vary quite significantly, and are a significant source of temporal variability in VI, a topic that will be further explored in Chapter (TBD). % TODO: Reference chapter
+Air exchange rates can vary quite significantly, and are a significant source of temporal variability in VI, a topic that will be further explored in Chapter \ref{chp:preferential_pathways}.
 However, they typically vary around relatively well-known values as air exchange rates are regulated in building codes.
 For residential buildings, it is typical that air exchange rate is around $A_e = \SI{0.5}{\per\hour}$ and thus for simplicity we will choose this value.\par
 
@@ -32,7 +33,12 @@ For residential buildings, it is typical that air exchange rate is around $A_e =
 Contaminant entry rates are significantly more difficult to determine, as they depend on air velocity through the foundation breach and the concentration gradient across it.
 The determination of these is the main point, and challenge in VI modeling.\par
 
-% TODO Add figure showing schematic of the entry into the building
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{crack_transport.png}
+  \caption[Schematic of soil-gas contaminant entry into a building through a breach in the foundation.]{Soil-gas contaminant vapors are transported from the underlying soil into a building via a breach in the foundation. The scale is exaggerated, and in our modeled scenario the crack is only \SI{1}{\centi\metre} wide.}
+  \label{fig:crack_transport}
+\end{figure}
 
 The contaminant entry $n_\mathrm{ck}$ is given by integrating the contaminant entry flux $j_\mathrm{ck}$ across the foundation crack boundary $A_\mathrm{ck}$.
 \begin{equation}
@@ -47,8 +53,8 @@ The interior of the crack is not explicitly modeled, but assumed to only contain
 \begin{equation}
   j_\mathrm{diffusion} = - \frac{D_\mathrm{air}}{L_\mathrm{slab}} (c_{in} - c_g)
 \end{equation}
-here $D_\mathrm{air} = \SI{7.2e-6}{\metre\squared\per\second}$ is the diffusion coefficient of TCE in air as a sample contaminant of interest; other contaminant of common concern have comparable diffusivities. % TODO: Make sure this is right
-$L_\mathrm{slab} = \SI{15}{\centi\metre}$ is the thickness of the foundation slab;
+here $D_\mathrm{air} = \SI{7.2e-6}{\metre\squared\per\second}$ is the diffusion coefficient of TCE in air as a sample contaminant of interest; other contaminant of common concern have comparable diffusivities.
+$L_\mathrm{slab} = \SI{15}{\centi\metre}$ is a typical thickness of a foundation slab;
 $c_{in}$ [\si{\mol\per\metre\cubed}] is the indoor contaminant concentration;
 $c_g$ [\si{\mol\per\metre\cubed}] is the contaminant gas-phase concentration at the foundation crack boundary.\par
 
@@ -69,5 +75,6 @@ Thus the total contaminant transport through the foundation crack is given by \e
     u_{ck} c_{in} - \frac{D_\mathrm{air}}{L_\mathrm{slab}} (c_{in} - c_g) & u_{ck} < 0
 \end{cases}
 \end{equation}
+(See Figure \ref{fig:crack_transport}.)
 Not only will \eqref{eq:contaminant_entry} be used to calculate the contaminant entry rate into house, but it is a necessary boundary condition for calculating the contaminant concentration in the soil.
 However, as we see, \eqref{eq:contaminant_entry} is a function of both the soil-gas concentration at the foundation crack boundary $c_g$ and the indoor contaminant concentration $c{in}$, thus these two are coupled and need to be solved simultaneously.\par

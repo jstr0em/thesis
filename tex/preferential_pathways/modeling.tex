@@ -1,17 +1,18 @@
 \section{Modeling A Preferential Pathway}
 
-To investigate the role a land drain type preferential pathway may have on a VI site, we extend the VI model presented in Chapter \ref{chp:method}.
-By adding a gravel sub-base layer underneath the foundation slab and a preferential pathway to this model, we develop a VI model scenario that is similar to the ASU house.\par
+To investigate the role a land drain type preferential pathway may have on a VI site, we extend the VI model presented in Chapter \ref{chp:modeling}.
+This is effectively looking at the situation known to exist at the ASU house, but without fully capturing all of the details from that site.
+By adding a gravel sub-base layer underneath the foundation slab and a preferential pathway conduit to the earlier presented model, we have developed a VI model scenario that is similar to that at the ASU house.\par
 
 Here we assume the gravel sub-base layer is \SI{30}{\centi\metre} thick and extends from the edges of the foundation slab.
 While the exact thickness of the gravel sub-base layer at the ASU house is not known, it was estimated to be roughly that thick.
+This is a typical thickness in US residential construction.
 The soil surrounding the house is assumed to be homogenous sandy clay.
-This is based on a description of the soil, and was chosen as the most appropriate choice is some modeling work  by \citeauthor{guo_vapor_2015}\cite{guo_vapor_2015}, one of the researchers at the ASU house.\par
+This is based on a description of the soil, and was chosen as the appropriate choice in modeling work by \citeauthor{guo_vapor_2015}\cite{guo_vapor_2015}, one of the researchers at the ASU house.\par
 
-The gravel sub-base, unlike the rest of the soil, is going to be relatively dry; it is covered by the foundation slab, so no rain infiltration will occur and due to the coarseness of the gravel, no moisture will be drawn up by capillary force.
-Nonetheless, some van Genuchten parameters for the gravel are necessary to solve the model.
-Additionally, based on the site description, we will assume that the surrounding soil is sandy clay, a , one of the researchers at the ASU house.
-Table \ref{tbl:soils} has the van Genuchten parameters used to model these.\par
+The gravel sub-base, unlike the rest of the soil, is relatively dry; it is covered by the foundation slab, so no rain infiltration will occur, and due to the coarseness of the gravel, no moisture will be drawn up by capillary forces.
+Nonetheless, some van Genuchten parameters for the gravel are necessary.
+Table \ref{tbl:soils} has the van Genuchten parameters used to model the soil and gravel.\par
 
 \begin{figure}[hbt!]
   \centering
@@ -20,37 +21,37 @@ Table \ref{tbl:soils} has the van Genuchten parameters used to model these.\par
   \label{fig:model_preferential_pathway}
 \end{figure}
 
-Based on the description of the land drain preferential pathway at the ASU site, we will model a preferential pathway as \SI{10}{\centi\metre} diameter pipe that exits at the interface between the soil and gravel sub-base layer; placing it near the foundation crack - similar to the ASU house\cite{guo_identification_2015}.
+Based on the description of the land drain preferential pathway at the ASU site, we modeled the preferential pathway as a \SI{10}{\centi\metre} diameter pipe that exits at the interface between the soil and gravel sub-base layer.
+It terminates near the foundation crack - as was actually the case at the ASU house\cite{guo_identification_2015}.
 Figure \ref{fig:model_preferential_pathway} shows the described scenario.\par
-
 
 \subsection{Geometry And Mesh}
 
-Explicitly modeling the entire preferential pathway in detail would requires a significant number of elements and at little gain; contaminant vapor transport in the far corners of the model are not of great interest.
-To save computational resources only the exit of the pipe is modeled as a \SI{10}{\centi\metre} diameter circle.\par
+Explicitly modeling the entire preferential pathway in detail would requires a significant number of elements with little gain; contaminant vapor transport in the pathway itself is not of great interest.
+To save computational resources only the exit of the pipe was modeled as a \SI{10}{\centi\metre} diameter circle representing the boundary between pipe and gravel.\par
 
-The existence of the preferential pathway pipe circle, only one plane of symmetry exists instead of two, and half of the model geometry has to be explicitly constructed instead of just a quarter like in Chapter \ref{chp:method}.\par
+With the addition of the preferential pathway pipe, now only one plane of symmetry exists instead of two, and it becomes necessary to model half of the domain model geometry instead of just a quarter of it as in Chapter \ref{chp:modeling}.
+On the scale of Figure \ref{fig:model_meshed}, the area around the exit of the preferential pathway is barely visible as a darker cluster or mesh nodes in the lower left side of the cutout representing the foundation.\par
 
-The meshing of the model follows the steps detailed in Chapter \ref{chp:method}, with the exception that a boundary layer mesh generated on the preferential pathway circle; a similar initial mesh is generated with subsequent adaptive mesh refinement.
+The meshing of the model follows the steps detailed in Chapter \ref{chp:modeling}, with the addition that a boundary layer mesh is generated on the preferential pathway exit plane.
+A similar initial mesh is generated as earlier, including subsequent adaptive mesh refinement.
 Figure \ref{fig:model_meshed} shows the resulting meshed geometry.\par
 
-% TODO Add mesh information in the description.
-% TODO Get an image of the adapted mesh, or is this it?
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.75\textwidth]{model_meshed.png}
-  \caption{Meshed geometry of the preferential pathway model. Notice the gravel sub-base layer and the preferential pathway exit.}
+  \caption{Meshed geometry of the preferential pathway model. Notice the gravel sub-base layer and the preferential pathway exit near the left hand foundation crack.}
   \label{fig:model_meshed}
 \end{figure}
 
 \subsection{Physics And Boundary Conditions}
 
-In this model, we use the same governing equations introduced in Chapter \ref{chp:method}, but are included here for completeness.
-However, to simulate the preferential pathway, we will need to supply two new boundary conditions  - one for the airflow in the soil governed by Darcy's Law, and another for the soil contaminant transport, which are discussed in their respective section below.
+In this model, we use the same governing equations introduced in Chapter \ref{chp:modeling}, and they are only included here for completeness.
+However, to simulate the preferential pathway, it is necessary to supply two new boundary conditions  - one related to the airflow from the pipe, and another for the contaminant transport, which are discussed in their respective section below.
 
 \subsubsection{Indoor Environment}
 
-The indoor environment is modeled using:
+The indoor environment is still modeled using:
 \begin{align*}
     V_\mathrm{bldg}\frac{\partial c_\mathrm{in}}{\partial t} &= n_\mathrm{ck} - V_\mathrm{bldg} A_e c_\mathrm{in} \\
     n_\mathrm{ck} &= \int_{A_\mathrm{ck}} j_\mathrm{ck} dA \\
@@ -72,7 +73,7 @@ and $c_g$ [\si{\mol\per\metre\cubed}] is the contaminant gas-phase concentration
 \subsubsection{Soil Moisture}
 
 Soil moisture content is determined using van Genuchten's retention model.
-We use two "soil" types in this model - gravel and sandy clay; their parameters and constants are shown in Table \ref{tbl:soils} in the appendix.
+We use two "soil" types in this model - gravel and sandy clay; their parameters and constants are shown in Table \ref{tbl:soils}.
 \begin{align*}
   \mathrm{Se} &=
     \begin{cases}
@@ -85,7 +86,7 @@ We use two "soil" types in this model - gravel and sandy clay; their parameters 
       \theta_t & \quad\quad\quad\quad h \geq 0
     \end{cases}\\
     k_r &= \begin{cases}
-        \mathrm{Se}^l \big[ 1 - \big( 1 - \mathrm{Se}^\frac{1}{m} \big) \big]^2 & \quad\quad h < 0 \\
+        (1-\mathrm{Se})^l \big(1 - \mathrm{Se}^\frac{1}{m} \big)^{2m} & \quad\quad h < 0 \\
         0 & \quad\quad h \geq 0
       \end{cases}\\
     \theta_g &= \theta_t - \theta_w
@@ -97,13 +98,13 @@ $\theta_w$ is the water filled porosity;
 $\theta_g$ is the gas filled pororsity;
 $\theta_t$ is the soil porosity;
 $\theta_r$ is the residual moisture content.
-and $k_r$ is the relative permeability for water;
+and $k_r$ is the relative permeability for air;
 
 \subsubsection{Soil Airflow}
 
-Airflow is modeled using our modified Darcy's Law expression.
+Airflow is still modeled using our modified Darcy's Law expression.
 \begin{equation*}
-  \frac{\partial}{\partial t} (\rho \theta_g) + \nabla \cdot \rho \Big( -\frac{(1-k_r) \kappa}{\mu} \nabla p \Big) = 0
+  \frac{\partial}{\partial t} (\rho \theta_g) + \nabla \cdot \rho \Big( -\frac{k_r \kappa}{\mu} \nabla p \Big) = 0
 \end{equation*}
 $\vec{u}$ [\si{\m\per\second}] is the airflow velocity vector;
 $\kappa$ [\si{\metre\squared}] is the permeability of the porous medium;
@@ -111,16 +112,17 @@ $\mu$ [\si{\pascal\second}] is the dynamic viscosity of the fluid;
 $\nabla p$ [\si{\pascal\per\metre}] is the pressure gradient;
 $\theta_g$ is the gas-filled porosity of the soil;
 $\rho = \SI{1.225}{\kilogram\per\metre\cubed}$ is the density of air;
-and $\mu = \SI{18.5e-6}{\pascal\second}$ is the dynamic viscosity of air.\par
+and $\mu = \SI{18.5e-6}{\pascal\second}$ is the dynamic viscosity of air.
+For steady-state cases, the first term is of course zero.\par
 
 \paragraph{Boundary conditions}
 
-Since the preferential pathway is assumed to be an open pipe, we assume it acts like a pressure gauge, just like the atmosphere, and is at the reference ambient atmospheric pressure.
+Since the preferential pathway is assumed to be an open pipe, we assume it acts like a pressure gauge, and is at the reference ambient atmospheric pressure.
 \begin{align*}
     &\text{Ground surface} &p = \SI{0}{\pascal} \\
-    &\text{Preferential pathway} &p = \SI{0}{\pascal} \\
+    &\text{Preferential pathway exit} &p = \SI{0}{\pascal} \\
     &\text{Foundation crack} &p = p_\mathrm{in/out} \; \si{\pascal} \\
-    &\text{Remaining} &-\vec{n}\cdot\rho\vec{u} = 0
+    &\text{Remaining boundaries} &-\vec{n}\cdot\rho\vec{u} = 0, \text{, i.e. no flow.}
 \end{align*}
 $p_\mathrm{in/out}$ is not specified here as we will parametrically choose values for it.\par
 
@@ -137,18 +139,19 @@ and $D_\mathrm{eff}$ [\si{\metre\squared\per\second}] is the effective diffusivi
 \begin{equation*}
   D_\mathrm{eff} = \Big(D_w \frac{\theta_w^{\frac{10}{3}}}{\theta_t^2} + D_g \frac{\theta_g^{\frac{10}{3}}}{\theta_t^2} K_H\Big)
 \end{equation*}
-$D_w = \SI{1.02e-9}{\metre\squared\per\second}$ and $D_g = \SI{6.87e-6}{\metre\squared\per\second}$ are the diffusion coefficient of TCE in water and air respectively;
+$D_w = \SI{1.02e-9}{\metre\squared\per\second}$ and $D_g = \SI{6.87e-6}{\metre\squared\per\second}$ are the diffusion coefficient of TCE in water and air respectively.
+Again, $\frac{\partial c_w}{\partial t} = 0$ for steady-state cases.\par
 
 \paragraph{Boundary conditions}
 
-The air in the pipe is assumed to be contaminated with TCE at a vapor concentration equal to the vapor in equilibrium with the groundwater source contaminant concentration.
-This assumption is based on contaminant samples taken from a manhole near the ASU house\cite{guo_vapor_2015} which demonstrated that contaminant vapor concentrations in the nearby sewer were on similar magnitude as near the contaminated groundwater source.
+The air in the pipe is assumed to be contaminated with TCE at a vapor concentration $c_g$ in equilibrium with the groundwater source contaminant concentration.
+This assumption is based on contaminant samples taken from a manhole near the ASU house\cite{guo_vapor_2015} which demonstrated that contaminant vapor concentrations in the nearby sewer were of similar magnitude as the contaminated groundwater source.
 \begin{align*}
   &\text{Atmosphere} & c_w = \SI{0}{\mol\per\metre\cubed} \\
   &\text{Groundwater} & c_w = c_{gw} \; \si{\mol\per\metre\cubed} \\
   &\text{Preferential pathway} & c_g = c_{gw} K_H \; \si{\mol\per\metre\cubed} \\
-  &\text{Foundation crack} & -\vec{n} \cdot \vec{N} = \frac{-j_{ck}}{K_H} \; \si{\mol\per\metre\squared\per\second}\\
-  &\text{All other} & -\vec{n} \cdot \vec{N} = \SI{0}{\mol\per\metre\squared\per\second}
+  &\text{Foundation crack} & -\vec{n} \cdot \vec{N} = -j_{ck} \; \si{\mol\per\metre\squared\per\second}\\
+  &\text{All other} & -\vec{n} \cdot \vec{N} = \SI{0}{\mol\per\metre\squared\per\second} \text{, i.e. no contaminant flux.}
 \end{align*}
-Note that we are neglecting any sorption in the soil, i.e. the sorption partitioning coefficient $K_p = \SI{0}{\metre\cubed\per\kilo\gram}$.
+Note that we are neglecting any sorption in the soil, i.e. the sorption partitioning coefficient $K_p = \SI{0}{\metre\cubed\per\kilo\gram}$, and this term does not enter in a steady-state analysis in any case.
 We will likewise normalize all concentrations to the source concentration $c_{gw}$, and any arbitrary value can be assigned.\par

@@ -1,104 +1,26 @@
 \input{preamble.tex}
 \begin{document}
 
-\title{
-{Understanding The Dynamics Of Vapor Intrusion Processes}\\ % Ideally max 7-8 words (look to abstract for key words and concepts). Think what someone might google if they're interested in my work.
-{\large Brown University}\\
-}
-\author{Jonathan G. V. Ström}
-\date{Spring 2020}
+\frontmatter
+\import{./}{titlepage.tex}
+\import{./}{copyright.tex}
+\import{./}{signature.tex}
+\import{./}{cv.tex}
+\import{./}{acknowledgements.tex}
+\tableofcontents
+\listoffigures
+\listoftables
 
-\maketitle
+\import{./}{abstract.tex}
 
-\begin{comment}
-
-\chapter*{Dedication}
-To mum and dad
-
-\chapter*{Declaration}
-I declare that..
-
-\chapter*{Acknowledgements}
-I want to thank...
-\end{comment}
-% frontmatter
-
-
-%\import{./}{abstract}
-
-
-
-\tableofcontents{}
-
-% main body
-%\subfile{introduction/main}
-%\subfile{methods/main}
+\mainmatter
+\subfile{introduction/main}
+\subfile{methods/main}
 \subfile{preferential_pathways/main}
-%\subfile{transport_classification/main}
-%\subfile{sorption/main}
-%\subfile{conclusions/main}
-
-\printbibliography
-% endmatter
-
-\begin{comment}
-Outline of the paper:
-
-Introduction:
-- Background/perspective on indoor air quality and VI
-
-- Temporal & spatial variability in VI
-
-- Overcoming variability
--- Techniques/methods; CPM, ITS, etc.
--- Problems with this approach (buildings respond differently to same stimuli)
--- Need better mechanistic understanding o VI to effectively use these (common thread is they seek to use or manipulate external variable for certain outcome.)
-
-- Modeling for understanding VI
--- Background/past applications
--- Brief description of what they can model?
--- Allow us to understand physical mechanism
-
-- Sorption & VI
--- Presented as another issue with unknown consequences
--- Combined model & experimental effort
-
-- Outline
--- Basically this but in words!
-
-Methods:
-- Introduction
--- More detailed history of modeling
---- Prominent models/developments
--- Limitations of many of these models (including ours)
-
-- Model methodology
--- CSM description & how to model this
--- Soil moisture
--- Darcy's law
--- Contaminant transport
--- Indoor air modeling
-
-- FEM
--- Brief description
--- Why we pick it/benefits/advantages
--- Limitations
--- COMSOL
--- Considerations
---- Geometry generation
---- Meshing
---- Solver settings (?)
-
-
-Preferential pathways:
-
-Classifying Transport & ITS:
-- Predicting ITS
-
-Sorption:
-
-Conclusions/Future work:
-
-\end{comment}
+\subfile{transport_implications/main}
+\subfile{sorption/main}
+\subfile{future_work/main}
+\printbibliography[heading=bibintoc]
+\subfile{appendix/main}
 
 \end{document}

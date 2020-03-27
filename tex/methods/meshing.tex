@@ -10,23 +10,41 @@ The most fundamental unit of the mesh is the element(s) that comprise the mesh.
 There are many different types of elements that can be used for meshing and choosing which ones to use depend primarily on the spatial dimensionality of the model, the particularities of the geometry, and the physics that we wish to model.
 Obviously different element types are by necessity needed to model a 2D vs. 3D geometry; you cannot mesh a 3D geometry with 2D squares.\par
 
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mesh_elements.png}
+  \caption{Some common mesh elements. Figure from COMSOL\cite{noauthor_detailed_nodate}.}
+  \label{fig:mesh_elements}
+\end{figure}
+
 There are primarily four types of 3D mesh elements available - the tetrahedral, cuboid, prism, and pyramid.
+Figure \ref{fig:mesh_elements} shows some common mesh elements.
 These can be combined in various ways to represent any 3D geometry.
 The most general 3D element is the tetrahedral and will approximate any geometry well.
 However, it is not always the most effective choice for meshing a geometry and another element type may be better suited.
 This is easiest illustrated with an example.\par
-
-% TODO Add figure of some elements
 
 Imagine that you are trying to simulate the laminar flow of some fluid in a pipe.
 Because of symmetry, only a wedge of the pipe needs to be explicitly modeled.
 Therefore, in this scenario, it might be beneficial to use prism elements rather than tetrahedrals, since these are already wedge shaped.
 
 The laminar pipe flow will have a gradient in the direction of the flow.
-Thus the mesh mostly only needs to be fine in the flow direction, while the mesh can be coarser in the orthogonal direction.
-Constructing a mesh on this basis would allow us to achieve a solution of high accuracy while still keeping the number of elements relatively small - all through clever mesh design.\par
+Thus the mesh mostly only needs to be fine in the flow direction, while the mesh can be coarser in the radial direction.
+Constructing a mesh on this basis would allow us to achieve a solution of high accuracy while still keeping the number of elements relatively small - all through clever mesh design (see Figure \ref{fig:cylinder_mesh}).\par
 
-% TODO Add figure showing what this type of meshing looks like
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{cylinder_regular_mesh.png}
+  \caption{Mesh using tetrahedrals. 50,197 elements.}
+  \end{subfigure}
+  \begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=\textwidth]{cylinder_swept_mesh.png}
+  \caption{Mesh using prism elements. 1900 elements.}
+  \end{subfigure}
+  \caption[Example of how physical mesh design can reduce the number of elements.]{By understanding the physics, here considering laminar flow in a pipe (segment), clever mesh design can significantly reduce the number of mesh elements. Notice that the mesh density in the axial direction is more or less the same.}
+  \label{fig:cylinder_mesh}
+\end{figure}
 
 This is of course a relatively simple example and more complicated geometries may need all kinds of element for constructing a clever design.
 These type of multi-element meshes can give significant computational saving but at the expense of often requiring significant user input to be generated.
@@ -55,11 +73,10 @@ This is not only due to its small size, but because the contaminant entry will b
 The COMSOL meshing algorithm only require a few parameters to relatively mesh a geometry with tetrahedrals.
 A description of each parameter and its value can be seen in Table \ref{tbl:meshing}.
 \begin{table}[htb!]
-  \caption{Inputs to COMSOLs meshing algorithm.}
-  \label{tbl:meshing}
   \begin{tabularx}{\linewidth}{l c X}
     \toprule
     Input & Value & Description \\
+    \midrule
     Maximum element size & \SI{1.5}{\metre} & Maximum size of a element \\
     Minimum element size & \SI{1}{\milli\metre} & Minimum size of a element \\
     Maximum element growth rate & 1.3 & Maximum allowed size increase of adjacent elements. 1.3 indicates that an element can only be 30\% larger than its neighbor. A smaller value gives a finer mesh. \\
@@ -67,6 +84,8 @@ A description of each parameter and its value can be seen in Table \ref{tbl:mesh
     Resolution of narrow regions & 1 & Control the number of layers of elements that are created in narrow regions. A larger value gives a finer mesh. \\
     \bottomrule
   \end{tabularx}
+  \caption{Inputs to COMSOLs meshing algorithm.}
+  \label{tbl:meshing}
 \end{table}
 
 \subsection{Boundary Layer Mesh}
@@ -99,6 +118,6 @@ Figure \ref{fig:mesh} shows our completed mesh.\par
     \caption{Side-view highlighting the boundary layer mesh.}
     \label{fig:mesh_boundary_layers}
   \end{subfigure}
-  \caption{Initial mesh of our geometry.}
+  \caption[Initial finite element mesh of the modeled vapor intrusion scenario.]{Initial finite element mesh of the modeled vapor intrusion scenario.}
   \label{fig:mesh}
 \end{figure}

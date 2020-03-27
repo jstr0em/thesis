@@ -27,8 +27,6 @@ Based on this these results we can see that cinderblock and soil have orders of 
 We can also see by that soil and cinderblock sorb quickly, much faster than a material with similar sorptive capacity such as paper.\par
 
 \begin{table}[htb!]
-  \caption{Fitted kinetic sorption parameters based on sorption experiment data. Six different types of materials are considered. $k_1$ and $k_2$ are the sorption and desorption constants respectively, and $K$ is the sorption equilibrium constant.}
-  \label{tbl:sorption_fit}
   \centering
   \begin{tabular}{l c c c}
     \toprule
@@ -42,6 +40,8 @@ We can also see by that soil and cinderblock sorb quickly, much faster than a ma
     Cinderblock & 4175.16 & 0.10 & 41501.26 \\
     \bottomrule
   \end{tabular}
+  \caption{Fitted kinetic sorption parameters based on sorption experiment data. Six different types of materials are considered. $k_1$ and $k_2$ are the sorption and desorption constants respectively, and $K$ is the sorption equilibrium constant.}
+  \label{tbl:sorption_fit}
 \end{table}
 
 \subsection{Soil Sorption's Retarding Effect}\label{sec:retardation_effect}
@@ -68,7 +68,7 @@ When $K_\mathrm{ads} = 5.28 \cdot 10^{-4} \; \mathrm{(m^3/kg)}$ this ratio is ro
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{equilibrium_retardation_depressurization.pdf}
-  \caption{The influence of contaminant sorption in soil. The top panel shows the effect of a step change in depressurization on attenuation factor relative to groundwater, as a function of sorption coefficient. The lower left panel shows the corresponding changes in attenuation factor with time, shown as a degree of approach to new equilibrium.  The lower right panel shows the corresponding change in absolute contaminant concentration immediately adjacent to the building foundation breach.}
+  \caption[The influence of contaminant sorption in soil.]{The influence of contaminant sorption in soil. The top panel shows the effect of a step change in depressurization on attenuation factor relative to groundwater, as a function of sorption coefficient. The lower left panel shows the corresponding changes in attenuation factor with time, shown as a degree of approach to new equilibrium.  The lower right panel shows the corresponding change in absolute contaminant concentration immediately adjacent to the building foundation breach.}
   \label{fig:equilibrium_depressurization}
 \end{figure}
 
@@ -92,7 +92,7 @@ Examining these changes allow us to better understand how the contaminant is tra
 Consistent with the long timescales for the indoor air to "adjust" to a new condition, the soil which is a significant source/sink for the contaminant share a similar slow adjustment.\par
 
 Before discussing the role of sorption, we can first compare the non-sorbing sand and sandy loam cases.
-Due to its higher permeability and lower moisture content, sand is significantly more permeable to gas flow than sandy loam (see Table \ref{tbl:model} for permeability values).
+Due to its higher permeability and lower moisture content, sand is significantly more permeable to gas flow than sandy loam (see Table \ref{tbl:soils} for permeability values).
 Consequently the advective transport through the foundation crack is much more significant in the sand case than the sandy loam case.
 This may be characterized by a Péclet number for transport through the foundation crack, where
 \begin{equation}\label{eq:peclet}
@@ -127,7 +127,7 @@ Since the indoor air concentration is lower than the soil-gas concentration, a d
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{equilibrium_retardation_overpressurization.pdf}
-  \caption{The influence of contaminant sorption in soil. The top panel shows the effect of a step change from building depressurization to pressurization on attenuation factor relative to groundwater, as a function of sorption coefficient. The lower left panel shows the corresponding changes in attenuation factor with time, shown as a degree of approach to new equilibrium.  The lower right panel shows the corresponding change in absolute contaminant concentration immediately adjacent to the building foundation breach.}
+  \caption[The influence of contaminant sorption in soil.]{The influence of contaminant sorption in soil. The top panel shows the effect of a step change from building depressurization to pressurization on attenuation factor relative to groundwater, as a function of sorption coefficient. The lower left panel shows the corresponding changes in attenuation factor with time, shown as a degree of approach to new equilibrium.  The lower right panel shows the corresponding change in absolute contaminant concentration immediately adjacent to the building foundation breach.}
   \label{fig:equilibrium_overpressurization}
 \end{figure}
 
@@ -152,7 +152,7 @@ While the assumptions regarding coverage of different portions of the space are 
     Paper & 0.1 & 0.032 \\
     \bottomrule
   \end{tabular}
-  \caption{The assumed contaminant penetration depth and subsequent volume of the sorbing indoor materials. The material surface area is assumed to be the same, and each material completely cover the surfaces of a 10x10x3 meter room.}
+  \caption[The assumed contaminant penetration depth and subsequent volume of the sorbing indoor materials.]{The assumed contaminant penetration depth and subsequent volume of the sorbing indoor materials. The material surface area is assumed to be the same, and each material completely cover the surfaces of a 10x10x3 meter room.}
   \label{tbl:sorbed_material}
 \end{table}
 
@@ -170,7 +170,7 @@ Here we see that as the building is depressurized, the indoor air contaminant co
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{sorption_indoor_cycle.pdf}
-  \caption{
+  \caption[Comparison of how sorption onto/from various indoor materials affect the indoor air contaminant concentration of a building that undergoes a certain pressurization cycle.]{
   Comparison of how sorption onto/from various indoor materials affect the indoor air contaminant concentration (bottom) of a building that undergoes a pressurization cycle (top left). The rate of de- and sorption for each considered material during the cycle are also shown (top right) and is governed by \eqref{eq:sorption_rate}. A positive value means that contaminant vapors are being sorbed onto/into the material and a negative means the material is desorbing into the indoor air space.}
   \label{fig:indoor_sorption_cycle}
 \end{figure}
@@ -250,7 +250,7 @@ We can also see that contaminant desorption from materials maintains a higher in
 
 \begin{figure}[!htb]
   \includegraphics[width=\textwidth]{sorption_mitigation.pdf}
-  \caption{Contaminant desorption from indoor materials delay the decrease in indoor contaminant concentration after a mitigation system has been implemented. The top panel shows the indoor air concentration after system implementation, considering desorption from different materials. The bottom panel quantifies how long it takes for the indoor concentration to decrease by a certain factor, considering the different cases.}
+  \caption[Contaminant desorption from indoor materials delay the decrease in indoor contaminant concentration after a mitigation system has been implemented.]{Contaminant desorption from indoor materials delay the decrease in indoor contaminant concentration after a mitigation system has been implemented. The top panel shows the indoor air concentration after system implementation, considering desorption from different materials. The bottom panel quantifies how long it takes for the indoor concentration to decrease by a certain factor, considering the different cases.}
   \label{fig:sorption_mitigation}
 \end{figure}
 

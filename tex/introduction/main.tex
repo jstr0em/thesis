@@ -1,23 +1,13 @@
 \documentclass[../thesis.tex]{subfiles}
 
+\graphicspath{
+  {../figures/introduction/},
+  {../../figures/introduction/},
+}
+
 \begin{document}
 
-\begin{comment}
-What do I want people to know after reading this?
-
-* Modeling is useful because it allows us to understand the physical causes of VI in great detail. It also lets use explore different scenarios.
-
-* Some basic background about VI, such as a brief history of it and indoor air quality (Radon etc).
-
-* What are the current hot topics in VI?
-- ITS
-- CPM
-
-* Why is temporal and spatial variability a problem in VI?
-\end{comment}
-
 \chapter{Introduction}
-% TODO: Think about if you want more subsections in background and variability issues.
 
 \import{./}{background.tex}
 \import{./}{variability_issues.tex}
@@ -25,33 +15,5 @@ What do I want people to know after reading this?
 \import{./}{problems_with_solutions.tex}
 \import{./}{modeling.tex}
 \import{./}{outline.tex}
-
-
-
-
-
-\begin{comment}
-\subfile{./background.tex}
-\subfile{./variability_issues.tex}
-\subfile{./proposed_solutions.tex}
-\subfile{./problems_with_solutions.tex}
-\subfile{./modeling.tex}
-\subfile{./outline.tex}
-
-\input{introduction/background.tex}
-\input{introduction/variability_issues.tex}
-\input{introduction/proposed_solutions.tex}
-\input{introduction/problems_with_solutions.tex}
-\input{introduction/modeling.tex}
-\input{introduction/outline.tex}
-
-\input{background.tex}
-\input{variability_issues.tex}
-\input{proposed_solutions.tex}
-\input{problems_with_solutions.tex}
-\input{modeling.tex}
-\input{outline.tex}
-\end{comment}
-
 
 \end{document}

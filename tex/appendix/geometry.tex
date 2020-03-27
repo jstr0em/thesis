@@ -1,0 +1,23 @@
+\chapter{Geometry Generation}
+
+To create our quarter geometry, only a few simple geometric objects and Boolean operations are required: two cuboids, two rectangles, one Boolean difference operation, and one Boolean join operation.
+Figure \ref{fig:geometry} shows the resulting geometry.
+Note that $z = \SI{0}{\metre}$ is the groundwater/soil interface and the plane of symmetry is around the $(x, y) = (\SI{0}{\metre},\SI{0}{\metre})$ axis\par
+
+To create the soil surrounding the building using the COMSOL geometry generator:
+\begin{enumerate}
+  \item Create a \SI{15}{\metre} by \SI{15}{\metre} by \SI{4}{\metre} block with its base at $(x, y, z) = (\SI{0}{\metre},\SI{0}{\metre},\SI{0}{\metre})$. This is the entire soil domain.
+  \item Create a \SI{5}{\metre} by \SI{5}{\metre} by \SI{1}{\metre} block with its base at $(x, y, z) = (\SI{0}{\metre},\SI{0}{\metre},\SI{3}{\metre})$. This will represent the volume that the house take up in the soil, i.e. the underground portion of the basement.
+  \item Perform a difference operation, removing the "basement" block from the "soil" block.
+\end{enumerate}
+At this point you will see that a quarter soil domain has been created, with an empty space that represents a house with a foundation slab located \SI{1}{\metre} bgs.\par
+
+The foundation crack will be modeled by joining two  \SI{1}{\centi\metre} wide strip that spans the perimeter of the surface that represents the house foundation.
+This strip is created by joining two rectangles on foundation surface:
+\begin{enumerate}
+  \item Define a work plane \SI{3}{\metre} above zero. This allows us to place two-dimensional objects on the surface of or inside a three-dimensional object.
+  \item On the work plane create a \SI{5}{\metre} by \SI{1}{\centi\metre} rectangle with its base at $(x, y) = (\SI{0}{\metre},\SI{5}{\metre} - \SI{1}{\centi\metre})$. This represents one side of the perimeter crack.
+  \item Copy the rectangle and rotate it \SI{90}{\degree} around the corner of the foundation, i.e. $(x, y) = (\SI{5}{\metre} - \SI{0.5}{\centi\metre},\SI{5}{\metre} - \SI{0.5}{\centi\metre})$.
+  \item Join the two rectangles to create a unified perimeter foundation crack.
+\end{enumerate}
+Now the geometry of this VI scenario is complete.\par

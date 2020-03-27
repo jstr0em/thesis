@@ -1,7 +1,10 @@
-\documentclass[12pt,twoside]{report}
+\documentclass[12pt,twoside]{book}
 % structural packages
 \usepackage[utf8]{inputenc}
-\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+%\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[letterpaper,margin=1in]{geometry}
+
+\usepackage[hidelinks]{hyperref}
 
 
 % packages for nicer/more complex floats
@@ -15,9 +18,14 @@
 \usepackage{comment}
 \usepackage{nth}
 \usepackage[toc,page]{appendix}
+\usepackage{setspace}
+\doublespacing
+
 
 % graphics/figures
 \usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
 
 % reference package
 \usepackage[style=numeric,sorting=none]{biblatex}
@@ -32,13 +40,3 @@
 % math packages
 \usepackage{amsmath}
 \usepackage{siunitx}
-
-% fancy header/footer settings
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[RO,LE]{Understanding The Dynamics Of Vapor Intrusion Processes}
-\fancyfoot{}
-\fancyfoot[LE,RO]{\thepage}
-\fancyfoot[LO,CE]{Chapter \thechapter}
-\fancyfoot[CO,RE]{Jonathan G. V. Ström}

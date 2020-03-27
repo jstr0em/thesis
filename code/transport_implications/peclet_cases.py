@@ -9,12 +9,10 @@ plt.style.use('seaborn')
 # laods data
 sim = pd.read_csv('../../data/simulations/peclet_soil_types_depth_pressure.csv', header=4)
 
-sim = sim[sim['p_in (Pa)'] == -15] # picks only largest depressurization
-
 # renames columns
 sim.rename(
     columns={
-        '% matsw.comp1.sw1': 'Soil Type',
+        '% matsw.comp1.sw1': 'Soil type',
         'Pe (1)': 'Pe',
         'depth (m)': 'Foundation type',
     },
@@ -31,7 +29,7 @@ sim['Foundation type'].replace(
 )
 
 # renames soil index to their respective names
-sim['Soil Type'].replace(
+sim['Soil type'].replace(
     to_replace={
         1: 'Sandy Loam',
         2: 'Sand',
@@ -49,29 +47,43 @@ sim['Soil Type'].replace(
     inplace=True,
 )
 
-sim.sort_values(by='Pe', inplace=True, ignore_index=True)
+sim.sort_values(by='Pe', inplace=True)
+
+basement = sim[sim['Foundation type']=='Basement']
+slab = sim[sim['Foundation type']=='Slab-on-grade']
+
+
+soil_order = basement['Soil type']
+
+y = []
+
+for soil in soil_order:
+    y.append(slab[slab['Soil type']==soil]['Pe'].values[0])
+
+print(y)
+
 
 fig, ax = plt.subplots(dpi=300)
 
-print(sim['Soil Type'].unique())
-
 ax.plot(
-    sim['Soil Type'].unique(),
-    np.repeat(1, len(sim['Soil Type'].unique())),
+    sim['Soil type'].unique(),
+    np.repeat(1, len(sim['Soil type'].unique())),
     color='k',
     linestyle='--'
 )
 
-sns.lineplot(
-    data=sim,
-    x='Soil Type',
-    y='Pe',
-    ax=ax,
-    hue='Foundation type',
-    sort=False,
-    legend=False,
-    marker='o',
+ax.plot(
+    basement['Soil type'],
+    basement['Pe'],
+    marker='o'
 )
+
+ax.plot(
+    soil_order,
+    y,
+    marker='o'
+)
+
 
 ax.set(
     title='Peclet number for contaminant transport through foundation crack\nBuilding depressurized at -15 Pa',
