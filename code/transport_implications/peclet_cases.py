@@ -88,6 +88,7 @@ ax.plot(
 ax.set(
     title='Peclet number for contaminant transport through foundation crack\nBuilding depressurized at -15 Pa',
     yscale='log',
+    ylabel='Pe'
 )
 
 plt.xticks(rotation=45)

@@ -6,7 +6,7 @@ from scipy.stats import pearsonr
 
 plt.style.use('seaborn')
 # reads data
-df = pd.read_csv('../data/asu_house.csv', converters={'Time':pd.to_datetime})
+df = pd.read_csv('../../data/sites/asu_house.csv', converters={'Time':pd.to_datetime})
 
 # I drop the very low concentrations (<0.001) as these are way below MDL
 # and just distorts the figure
@@ -32,11 +32,10 @@ for case in df['LandDrain'].unique():
 
 ax.set(
     title='Land drain\'s effect on VI pressure dependence at the ASU house\nPearson\'s r value for each case shown',
-    ylabel='$\\log{(\\alpha)}$',
+    ylabel='$\\log_{10}{(\\alpha_\\mathrm{gw})}$',
     xlabel='$p_\\mathrm{in/out} \; \\mathrm{(Pa)}$',
 )
 ax.legend(title='Land Drain')
 
-plt.savefig('../figures/asu_pressure_dependence.pdf')
-plt.savefig('../figures/asu_pressure_dependence.png')
+plt.savefig('../../figures/preferential_pathways/asu_pressure_dependence.pdf')
 plt.show()

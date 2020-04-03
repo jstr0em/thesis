@@ -1,0 +1,133 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{import}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{nth}
+\usepackage{siunitx}
+\usepackage[style=numeric,sorting=none]{biblatex}
+\addbibresource{../references.bib}
+
+\graphicspath{
+  {../../figures/introduction/},
+  {../../figures/preferential_pathways/},
+  {../../figures/defense/},
+  {../../figures/methods/},
+  {../../figures/transport_implications/},
+}
+
+% beamer settings
+\beamertemplatenavigationsymbolsempty
+
+% title slide
+\title{Understanding the Dynamics of Vapor Intrusion Processes}
+\subtitle{Through Numerical Modeling}
+\author{Jonathan Ström}
+\institute{Brown University \\ School of Engineering}
+\date{May 2020}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\import{./}{intro.tex}
+\import{./}{modeling.tex}
+\import{./}{preferential_pathways.tex}
+
+\begin{frame}
+  \centering
+  \huge Thank you!
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+\printbibliography
+\end{frame}
+
+\import{./}{transport.tex}
+
+\begin{comment}
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+
+Goal: ~20 slides with real content. 35-40 minute presentation.
+~5 for introduction
+~2 for modeling
+~5 for ASU house & CPM analysis
+~3 for advection/diffusion
+~2 for ITS and pressure
+
+-: Perspective on indoor air quality & radon
+-: VI introduction
+-: VI investigations
+-: Attenuation factors (their uses) and VI investigation empiricism problems
+-: Numerical modeling in VI
+  -- VI investigations highly empirical
+  -- Difficult to understand due to complexity of sites
+  -- First-principles modeling allows us to unravel this complexity (sensitivity analysis) & investigate physical phenomena
+-: Background of VI modeling
+  -- Analytical models, i.e. J&E
+    -- Cannot be modified - of limited use
+  -- Numerical models
+    -- More generalizable, but can be more difficult to use
+    -- A few have been developed but not well-used in VI investigations
+    -- Not used in a transient setting
+-: Use models to explore in particular temporal variability
+
+
+-: Examining ASU house and CPM (and issues with the assumptions)
+-: ASU house background
+-: CPM
+-: ASU house model
+-: Replicating ASU results
+-: Introducing
+
+-: Which site conditions give rise to advective dominated entry?
+-: Soil and foundation types
+
+-: ITS (issues with ITS approach, similar to )
+
+-: Predicting indoor contaminant concentration using weather as ITS (proxy for pressure)
+
+
+
+
+What do I want to say?
+
+How does my work contribute to the scientific understanding of VI?
+- Numerical modeling offers the ability to gain key physical insights of the VI process at a site that typical empirical approach to VI site investigations are unlikely to discover.
+- Through this effort we explore how by determining if contaminant entry into a building is characterized by advection or diffusion can be crucial for assessing VI risk.
+
+What is the empirical approach in VI and what are the issues with it?
+- Simple data collection and analysis with no real mechanistic understand of VI process at a site
+- Illustrated by how the EPA uses attenuation factors
+
+
+Why should we be concerned with VI?
+- Prevalence of the problem (or potential anyway)
+- Health risks (carcinogenic)
+- TCE and PCE common examples
+
+What is VI?
+- Explain using graphics
+- Use Radon story to tell how much can accumulate in indoor environment
+
+How do modeling help us understand VI?
+- Developed from first-principles and can control the physics (keep variables fixed etc)
+- Used early on, developed from Radon models
+- Early models analytical and limited
+  - Steady-state
+  -
+
+What do I mean by CSM and how do they relate to model development?
+\end{comment}
+
+\end{document}
